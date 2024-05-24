@@ -1,117 +1,97 @@
 body {
     font-family: Arial, sans-serif;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
+    justify-content: flex-start;
     height: 100vh;
     margin: 0;
     background-color: #f4f4f4;
-}
-
-.marquee-container {
+    overflow-y: auto;
+  }
+  .marquee-container {
     width: 100%;
     overflow: hidden;
-}
-
-.marquee {
+    background-color: #007bff;
+    color: white;
+  }
+  .marquee h1 {
     white-space: nowrap;
-}
-
-.container {
+    margin: 0;
+  }
+  .container {
     display: flex;
-    justify-content: center;
-}
-
-.dashboard-container {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  .dashboard-container {
     background: #fff;
-    padding: 40px;
+    padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 90%; /* Adjust the width as needed */
-    max-width: 800px; /* Set a maximum width */
+    width: 90%;
+    max-width: 800px;
     text-align: center;
-}
-
-button {
+    margin: 20px 0;
+  }
+  .button-box {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 20px 0;
+  }
+  .button-box button {
     padding: 10px 20px;
-    background-color: #007bff;
+    background-color: #28a745;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin-top: 10px;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
-/* Dropdown Content (Hidden by Default) */
-.dropdown-content {
+    margin: 10px;
+    flex: 1 1 150px;
+    max-width: 200px;
+  }
+  .button-box button:hover {
+    background-color: #218838;
+  }
+  .dropdown {
+    position: relative;
+    display: inline-block;
+    margin-top: 20px;
+  }
+  .dropdown-content {
     display: none;
     position: absolute;
     background-color: #f9f9f9;
     min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
-}
-
-/* Links inside the dropdown */
-.dropdown-content a {
+  }
+  .dropdown-content a {
     color: black;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
-}
-
-/* Change color of dropdown links on hover */
-.dropdown-content a:hover {
+  }
+  .dropdown-content a:hover {
     background-color: #f1f1f1;
-}
-
-/* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {
+  }
+  .dropdown:hover .dropdown-content {
     display: block;
-}
-
-/* Flexbox for school activities */
-.activities-container {
+  }
+  .activities-container {
     display: flex;
     justify-content: space-around;
     margin-top: 20px;
-}
-
-.activity {
+    flex-wrap: wrap;
+  }
+  .activity {
     flex: 1;
     padding: 20px;
     background-color: #f9f9f9;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     text-align: center;
-    margin: 0 5px; /* Adjusted margin for better spacing */
-}
-
-/* Media query for responsiveness */
-@media screen and (max-width: 768px) {
-    .dashboard-container {
-        padding: 20px; /* Adjust padding for smaller screens */
-    }
-}
-
-@media screen and (max-width: 480px) {
-    .dashboard-container {
-        padding: 10px; /* Further adjust padding for even smaller screens */
-    }
-}
-@media screen and (max-width: 768px) {
-    .marquee-container {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-    }
-
-    .marquee {
-        font-size: 20px; /* Adjust font size for smaller screens */
-    }
-}
+    margin: 10px;
+  }

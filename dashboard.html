@@ -5,6 +5,140 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ar-Rashaad Academy Dashboard</title>
   <link rel="stylesheet" href="dashboard.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      height: 100vh;
+      margin: 0;
+      background-color: #f4f4f4;
+      overflow-y: auto;
+    }
+    .marquee-container {
+      width: 100%;
+      overflow: hidden;
+      background-color: #007bff;
+      color: white;
+    }
+    .marquee h1 {
+      white-space: nowrap;
+      margin: 0;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+    .dashboard-container {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      width: 90%;
+      max-width: 800px;
+      text-align: center;
+      margin: 20px 0;
+    }
+    .button-box {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 20px 0;
+    }
+    .button-box button {
+      padding: 10px 20px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 10px;
+      flex: 1 1 150px;
+      max-width: 200px;
+    }
+    .button-box button:hover {
+      background-color: #218838;
+    }
+    .dropdown {
+      position: relative;
+      display: inline-block;
+      margin-top: 20px;
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f9f9f9;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+    }
+    .dropdown-content a {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+    .dropdown-content a:hover {
+      background-color: #f1f1f1;
+    }
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+    .activities-container {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+    .activity {
+      flex: 1;
+      padding: 20px;
+      background-color: #f9f9f9;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      margin: 10px;
+    }
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgb(0,0,0);
+      background-color: rgba(0,0,0,0.4);
+      padding-top: 60px;
+    }
+    .modal-content {
+      background-color: #fefefe;
+      margin: 5% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+      max-width: 500px;
+      border-radius: 10px;
+    }
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
   <div class="marquee-container">
@@ -16,13 +150,12 @@
     <div class="dashboard-container">
       <h2>Welcome to the Dashboard</h2>
       <p id="welcomeMessage"></p>
-      <button onclick="startMathExam()">Math Exam</button>
-      <button onclick="startEnglishExam()">English Exam</button>
-      <button onclick="startChemistryExam()">Chemistry Exam</button>
-      <button onclick="startPhysicsExam()">Physics Exam</button>
-      <button onclick="startBiologyExam()">Biology Exam</button>
-      <button onclick="startCivicExam()">Civic Exam</button>
-  
+      <div class="button-box">
+        <button onclick="cbtMode()">CBT Mode</button>
+        <button onclick="practiceMode()">Practice Mode</button>
+        <button onclick="admissionStatus()">Admission Status</button>
+        <button onclick="schoolPortal()">School Portal</button>
+      </div>
       <div class="dropdown">
         <button class="dropbtn">More about Ar-Rashaad Academy</button>
         <div class="dropdown-content">
@@ -31,7 +164,6 @@
           <a href="#">Facilities</a>
         </div>
       </div>
-  
       <div class="activities-container">
         <div class="activity">
           <h3>How to Pay</h3>
@@ -48,34 +180,87 @@
       </div>
     </div>
   </div>
-  
+
+  <!-- CBT Mode Modal -->
+  <div id="cbtModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>CBT Mode</h2>
+      <form id="cbtForm">
+        <label for="numQuestions">Number of Questions:</label>
+        <input type="number" id="numQuestions" name="numQuestions" min="1" max="20" required>
+        <label for="examTime">Exam Time (minutes):</label>
+        <input type="number" id="examTime" name="examTime" min="1" required>
+        <div class="button-box">
+          <button type="button" onclick="startExam('math')">Math Exam</button>
+          <button type="button" onclick="startExam('english')">English Exam</button>
+          <button type="button" onclick="startExam('chemistry')">Chemistry Exam</button>
+          <button type="button" onclick="startExam('physics')">Physics Exam</button>
+          <button type="button" onclick="startExam('biology')">Biology Exam</button>
+          <button type="button" onclick="startExam('civic')">Civic Exam</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const name = localStorage.getItem('name');
       document.getElementById('welcomeMessage').innerText = `Welcome, ${name}!`;
     });
 
-    function startMathExam() {
-      window.location.href = 'math.html';
+    function cbtMode() {
+      document.getElementById('cbtModal').style.display = 'block';
     }
-    function startEnglishExam() {
-      window.location.href = 'english.html';
+
+    function practiceMode() {
+      alert('Practice Mode selected');
     }
+
+    function admissionStatus() {
+      alert('Admission Status selected');
+    }
+
+    function schoolPortal() {
+      alert('School Portal selected');
+    }
+
     document.getElementsByClassName("dropbtn")[0].addEventListener('click', function() {
       document.getElementsByClassName("dropdown-content")[0].classList.toggle("show");
     });
-  
+
     window.onclick = function(event) {
       if (!event.target.matches('.dropbtn')) {
         var dropdowns = document.getElementsByClassName("dropdown-content");
-        var i;
-        for (i = 0; i < dropdowns.length; i++) {
+        for (var i = 0; i < dropdowns.length; i++) {
           var openDropdown = dropdowns[i];
           if (openDropdown.classList.contains('show')) {
             openDropdown.classList.remove('show');
           }
         }
       }
+    }
+
+    // CBT Modal functionality
+    const modal = document.getElementById('cbtModal');
+    const span = document.getElementsByClassName('close')[0];
+
+    span.onclick = function() {
+      modal.style.display = 'none';
+    }
+
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = 'none';
+      }
+    }
+
+    function startExam(subject) {
+      const numQuestions = document.getElementById('numQuestions').value;
+      const examTime = document.getElementById('examTime').value;
+      alert(`Starting ${subject} exam with ${numQuestions} questions and ${examTime} minutes.`);
+      // Redirect to the corresponding exam page
+      window.location.href = `${subject}.html?numQuestions=${numQuestions}&examTime=${examTime}`;
     }
   </script>
 </body>
