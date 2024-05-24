@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Math Exam - Ar-Rashaad Academy</title>
+  <style>
+   body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    margin: 0;
+    background-color: #f4f4f4;
+    overflow-y: auto;
+}
+
+.exam-container {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 800px;
+    margin: 20px 0;
+}
+
+.question {
+    margin-bottom: 20px;
+}
+
+.question p {
+    font-weight: bold;
+}
+
+input[type="radio"] {
+    margin-right: 10px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: block;
+    margin: 20px auto 0;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+/* Media query for responsiveness */
+@media screen and (max-width: 768px) {
+    .exam-container {
+        width: 90%; /* Adjust width for smaller screens */
+    }
+
+    input[type="radio"] {
+        margin-right: 5px; /* Reduce margin for smaller screens */
+    }
+
+    button {
+        margin: 20px auto; /* Center the button */
+    }
+}
+
+  </style>
+</head>
+<body>
+  <div class="exam-container">
+    <h2>Math Exam - Ar-Rashaad Academy</h2>
+    <form id="mathExamForm">
+      <h1>AR RASHAAD</h1>
+      <h2>legos</h2>
+      <h1>AR RASHAAD</h1>
+      <h2>legos</h2><h1>AR RASHAAD</h1>
+      <h2>legos</h2><h1>AR RASHAAD</h1>
+      <h2>legos</h2>
+      <h1>AR RASHAAD</h1>
+      <h2>legos</h2>
+      <h1>AR RASHAAD</h1>
+      <h2>legos</h2>
+      <h1>AR RASHAAD</h1>
+      <h2>legos</h2>
+      <h1>AR RASHAAD</h1>
+      <h2>legos</h2>
+      <h1>AR RASHAAD</h1>
+      <h2>legos</h2>
+      <h1>AR RASHAAD</h1>
+      <h2>legos</h2>
+      <h1>AR RASHAAD</h1>
+      <h2>legos</h2>
+      <h1>AR RASHAAD</h1>
+      <h2>legos</h2>
+      <h1>AR RASHAAD</h1>
+      <h2>legos</h2>
+      <h1>AR RASHAAD</h1>
+      <h2>legos</h2>
+      <h1>AR RASHAAD</h1>
+      <h2>legos</h2>
+      <h1>AR RASHAAD</h1>
+      <h2>legos</h2>
+      <h1>AR RASHAAD</h1>
+      <h2>legos</h2>
+      <h1>AR RASHAAD</h1>
+      <h2>legos</h2>
+      <h1>AR RASHAAD</h1>
+      <h2>legos</h2>
+      <h1>AR RASHAAD</h1>
+      <h2>legos</h2>
+      <h1>AR RASHAAD</h1>
+      <h2>legos</h2>
+    </form>
+    <button onclick="submitExam()">Submit Exam</button>
+  </div>
+  <script>
+    const questions = [
+      { question: 'Solve the quadratic equation: x^2 - 5x + 6 = 0', answers: ['x=2 or x=3', 'x=1 or x=6', 'x=-2 or x=3', 'x=-1 or x=-6'], correct: 'x=2 or x=3' },
+      { question: 'Find the roots of the equation: x^2 + 3x - 4 = 0', answers: ['x=4 or x=-1', 'x=-4 or x=1', 'x=2 or x=-2', 'x=-3 or x=4'], correct: 'x=1 or x=-4' },
+      { question: 'What is the area of a rectangle with length 8 and width 5?', answers: ['40', '45', '35', '30'], correct: '40' },
+      { question: 'What is the perimeter of a square with side length 7?', answers: ['21', '28', '14', '35'], correct: '28' },
+      { question: 'In a Venn diagram, how many regions are there with two overlapping sets?', answers: ['2', '3', '4', '5'], correct: '3' },
+      { question: 'In Venn diagram, if set A has 10 elements and set B has 15 elements and they have 5 elements in common, how many elements are in the union of A and B?', answers: ['20', '25', '30', '15'], correct: '20' },
+      { question: 'Simplify: 2^3 * 2^4', answers: ['2^7', '2^12', '2^1', '2^4'], correct: '2^7' },
+      { question: 'Simplify: (3^2)^3', answers: ['3^5', '3^6', '3^9', '3^12'], correct: '3^6' },
+      { question: 'What is log(100) base 10?', answers: ['1', '2', '3', '4'], correct: '2' },
+      { question: 'What is the value of log(1) base 10?', answers: ['0', '1', '10', '-1'], correct: '0' },
+      { question: 'Solve for x: 5x - 7 = 3', answers: ['x=1', 'x=2', 'x=3', 'x=4'], correct: 'x=2' },
+      { question: 'What is the sum of the first 10 natural numbers?', answers: ['45', '50', '55', '60'], correct: '55' },
+      { question: 'If the radius of a circle is 7, what is its circumference? (Use π = 22/7)', answers: ['22', '44', '154', '28'], correct: '44' },
+      { question: 'What is the area of a triangle with base 10 and height 5?', answers: ['25', '30', '35', '40'], correct: '25' },
+      { question: 'What is 2^5?', answers: ['16', '32', '64', '128'], correct: '32' },
+      { question: 'Simplify: 3^3 * 3^2', answers: ['3^5', '3^6', '3^8', '3^9'], correct: '3^5' },
+      { question: 'What is the cube root of 27?', answers: ['2', '3', '4', '5'], correct: '3' },
+      { question: 'If the angles of a triangle are 30°, 60°, and __°, what is the third angle?', answers: ['60', '90', '120', '150'], correct: '90' },
+      { question: 'What is the value of x in the equation 2x + 3 = 11?', answers: ['2', '3', '4', '5'], correct: '4' },
+      { question: 'What is the volume of a cube with side length 4?', answers: ['16', '32', '64', '128'], correct: '64' },
+    ];
+
+    function loadQuestions() {
+      const form = document.getElementById('mathExamForm');
+      questions.forEach((q, index) => {
+        const questionDiv = document.createElement('div');
+        questionDiv.classList.add('question');
+        questionDiv.innerHTML = `
+          <p>${index + 1}. ${q.question}</p>
+          ${q.answers.map((answer, i) => `
+            <label>
+              <input type="radio" name="q${index + 1}" value="${answer}">
+              ${answer}
+            </label>
+          `).join('<br>')}
+        `;
+        form.appendChild(questionDiv);
+      });
+    }
+
+    function submitExam() {
+      const form = document.getElementById('mathExamForm');
+      const formData = new FormData(form);
+      let score = 0;
+
+      questions.forEach((q, index) => {
+        if (formData.get(`q${index + 1}`) === q.correct) {
+          score++;
+        }
+      });
+
+      alert(`You scored ${score} out of ${questions.length}`);
+    }
+
+    document.addEventListener('DOMContentLoaded', loadQuestions);
+  </script>
+</body>
+</html>

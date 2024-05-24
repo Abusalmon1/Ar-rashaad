@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>English Exam - Ar-Rashaad Academy</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 100vh;
+      margin: 0;
+      background-color: #f4f4f4;
+    }
+    .exam-container {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      width: 80%;
+      max-width: 800px;
+      margin: 20px 0;
+    }
+    .question {
+      margin-bottom: 20px;
+    }
+    .question p {
+      font-weight: bold;
+    }
+    input[type="radio"] {
+      margin-right: 10px;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      display: block;
+      margin: 20px auto 0;
+    }
+    button:hover {
+      background-color: #218838;
+    }
+  </style>
+</head>
+<body>
+  <div class="exam-container">
+    <h2>English Exam - Ar-Rashaad Academy</h2>
+    <form id="englishExamForm">
+      <!-- Questions will be inserted here -->
+    </form>
+    <button onclick="submitExam()">Submit Exam</button>
+  </div>
+  <script>
+    const questions = [
+      { question: 'Choose the correct spelling:', answers: ['Accommodation', 'Acommodation', 'Acomodation', 'Accomodation'], correct: 'Accommodation' },
+      { question: 'Identify the adverb in the following sentence: "She sang beautifully."', answers: ['She', 'sang', 'beautifully', 'sang beautifully'], correct: 'beautifully' },
+      { question: 'What is the plural form of "child"?', answers: ['childs', 'children', 'childes', 'childen'], correct: 'children' },
+      { question: 'Select the correct verb form: "I ___ the book yesterday."', answers: ['read', 'reads', 'reading', 'readed'], correct: 'read' },
+      { question: 'Choose the correct form of the verb: "He ___ very fast."', answers: ['run', 'runs', 'running', 'runned'], correct: 'runs' },
+      { question: 'Which sentence is grammatically correct?', answers: ['They was here yesterday.', 'They is here yesterday.', 'They were here yesterday.', 'They be here yesterday.'], correct: 'They were here yesterday.' },
+      { question: 'Identify the antonym of "brave":', answers: ['Cowardly', 'Fearless', 'Bold', 'Courageous'], correct: 'Cowardly' },
+      { question: 'What type of word is "quickly" in the sentence: "He quickly finished his homework."', answers: ['Adjective', 'Noun', 'Adverb', 'Verb'], correct: 'Adverb' },
+      { question: 'Choose the correct sentence:', answers: ['She don’t like ice cream.', 'She doesn’t likes ice cream.', 'She doesn’t like ice cream.', 'She don’t likes ice cream.'], correct: 'She doesn’t like ice cream.' },
+      { question: 'What is the past tense of "write"?', answers: ['Writed', 'Written', 'Wrote', 'Write'], correct: 'Wrote' },
+      { question: 'Select the correct punctuation:', answers: ['The dog run into the park.', 'The dog run into the park', 'The dog run into the park!', 'The dog run into the park?'], correct: 'The dog run into the park.' },
+      { question: 'What is the plural of "mouse"?', answers: ['Mouses', 'Mices', 'Mouse', 'Mice'], correct: 'Mice' },
+      { question: 'Choose the correctly punctuated sentence:', answers: ['I love to swim, read, and dance.', 'I love to swim, read and dance.', 'I love to swim read and dance.', 'I love to swim read, and dance.'], correct: 'I love to swim, read, and dance.' },
+      { question: 'Select the correct sentence:', answers: ['She was gone to the store.', 'She were went to the store.', 'She went to the store.', 'She gone to the store.'], correct: 'She went to the store.' },
+      { question: 'Identify the noun in the following sentence: "The cat chased the mouse."', answers: ['cat', 'chased', 'mouse', 'the'], correct: 'cat' },
+      { question: 'Choose the correct comparative form: "Big ___ biggest."', answers: ['more', 'bigger', 'most', 'biggest'], correct: 'bigger' },
+      { question: 'Identify the conjunction in the sentence: "He likes both chocolate and vanilla."', answers: ['He', 'likes', 'both', 'and'], correct: 'and' },
+      { question: 'What is the past participle of "eat"?', answers: ['Ate', 'Eating', 'Eaten', 'Eat'], correct: 'Eaten' },
+      { question: 'Choose the correct possessive form:', answers: ['The dogs tails wagged.', 'The dogs tail wagged.', 'The dog’s tails wagged.', 'The dogs\' tail wagged.'], correct: 'The dog’s tails wagged.' },
+      { question: 'Identify the preposition in the following sentence: "The book is on the table."', answers: ['The', 'book', 'is', 'on'], correct: 'on' },
+      { question: 'Select the correct sentence:', answers: ['They’re going to the party their.', 'They’re going to the party they’re.', 'Their going to the party there.', 'They’re going to the party there.'], correct: 'They’re going to the party there.' }
+    ];
+
+    function loadQuestions() {
+      const form = document.getElementById('englishExamForm');
+      questions.forEach((q, index) => {
+        const questionDiv = document.createElement('div');
+        questionDiv.classList.add('question');
+        questionDiv.innerHTML = `
+          <p>${index + 1}. ${q.question}</p>
+          ${q.answers.map((answer, i) => `
+            <label>
+              <input type="radio" name="q${index + 1}" value="${answer}">
+              ${answer}
+            </label>
+          `).join('<br>')}
+        `;
+        form.appendChild(questionDiv);
+      });
+    }
+
+    function submitExam() {
+      const form = document.getElementById('englishExamForm');
+      const formData = new FormData(form);
+      let score = 0;
+
+      questions.forEach((q, index) => {
+        if (formData.get(`q${index + 1}`) === q.correct) {
+          score++;
+        }
+      });
+
+      alert(`You scored ${score} out of ${questions.length}`);
+    }
+
+    document.addEventListener('DOMContentLoaded', loadQuestions);
+  </script>
+</body>
+</html>

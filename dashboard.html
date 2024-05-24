@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ar-Rashaad Academy Dashboard</title>
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+  <div class="marquee-container">
+    <marquee behavior="scroll" direction="left" class="marquee">
+      <h1>Ar-Rashaad Academy</h1>
+    </marquee>
+  </div>
+  <div class="container">
+    <div class="dashboard-container">
+      <h2>Welcome to the Dashboard</h2>
+      <p id="welcomeMessage"></p>
+      <button onclick="startMathExam()">Math Exam</button>
+      <button onclick="startEnglishExam()">English Exam</button>
+      <button onclick="startChemistryExam()">Chemistry Exam</button>
+      <button onclick="startPhysicsExam()">Physics Exam</button>
+      <button onclick="startBiologyExam()">Biology Exam</button>
+      <button onclick="startCivicExam()">Civic Exam</button>
+  
+      <div class="dropdown">
+        <button class="dropbtn">More about Ar-Rashaad Academy</button>
+        <div class="dropdown-content">
+          <a href="#">History</a>
+          <a href="#">Mission & Vision</a>
+          <a href="#">Facilities</a>
+        </div>
+      </div>
+  
+      <div class="activities-container">
+        <div class="activity">
+          <h3>How to Pay</h3>
+          <p>Find out how to pay school fees online.</p>
+        </div>
+        <div class="activity">
+          <h3>School Portal</h3>
+          <p>Access the school's online portal for students and parents.</p>
+        </div>
+        <div class="activity">
+          <h3>More</h3>
+          <p>Explore more about Ar-Rashaad Academy.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const name = localStorage.getItem('name');
+      document.getElementById('welcomeMessage').innerText = `Welcome, ${name}!`;
+    });
+
+    function startMathExam() {
+      window.location.href = 'math.html';
+    }
+    function startEnglishExam() {
+      window.location.href = 'english.html';
+    }
+    document.getElementsByClassName("dropbtn")[0].addEventListener('click', function() {
+      document.getElementsByClassName("dropdown-content")[0].classList.toggle("show");
+    });
+  
+    window.onclick = function(event) {
+      if (!event.target.matches('.dropbtn')) {
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
+          var openDropdown = dropdowns[i];
+          if (openDropdown.classList.contains('show')) {
+            openDropdown.classList.remove('show');
+          }
+        }
+      }
+    }
+  </script>
+</body>
+</html>

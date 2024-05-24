@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ar-Rashaad Academy Exam Login</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="login-container">
+    <h2>Ar-Rashaad Academy Exam Login</h2>
+    <form id="loginForm">
+      <input type="text" id="schNumber" name="schNumber" placeholder="School Number" required>
+      <input type="text" id="name" name="name" placeholder="Name" required>
+      <input type="text" id="class" name="class" placeholder="Class" required>
+      <button type="submit">Login</button>
+    </form>
+  </div>
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const schNumber = document.getElementById('schNumber').value;
+      const name = document.getElementById('name').value;
+      const classValue = document.getElementById('class').value;
+
+      if (schNumber && name && classValue) {
+        localStorage.setItem('schNumber', schNumber);
+        localStorage.setItem('name', name);
+        localStorage.setItem('class', classValue);
+        window.location.href = 'dashboard.html';
+      } else {
+        alert('Please fill in all fields');
+      }
+    });
+  </script>
+</body>
+</html>
