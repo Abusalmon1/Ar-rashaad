@@ -1,0 +1,109 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admission Status - Ar-Rashaad Academy</title>
+</head>
+<body>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const score = localStorage.getItem('score');
+      const currentClass = localStorage.getItem('currentClass');
+
+      // Check if the score and current class are available
+      if (score !== null && currentClass !== null) {
+        const passingScore = 10; // Define the passing score threshold
+
+        // Check if the student's score meets the passing criteria
+        if (parseInt(score) >= passingScore) {
+          // Define the class promotion logic
+          const classPromotion = {
+            'ss1': 'ss2',
+            'ss2': 'ss3',
+            'ss3': 'graduate'
+          };
+
+          // Get the next class
+          const nextClass = classPromotion[currentClass];
+
+          // If the student is already at the highest class
+          if (!nextClass) {
+            alert("Congratulations! You have completed all classes and graduated.");
+          } else {
+            // Update the student's current class in localStorage
+            localStorage.setItem('currentClass', nextClass);
+            alert(`Congratulations! You have passed the exam and are promoted to ${nextClass.toUpperCase()}.`);
+          }
+        } else {
+          // If the student's score is insufficient, show a message indicating the need for improvement
+          alert("You have not passed the exam. Please study harder and try again.");
+        }
+      } else {
+        // If the score or current class is not available, show a message indicating the absence of exam results or current class
+        alert("No exam results available or current class is not set.");
+      }
+    });
+  </script>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admission Status - Ar-Rashaad Academy</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 100vh;
+      margin: 0;
+      background-color: #f4f4f4;
+    }
+    .status-container {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      width: 80%;
+      max-width: 800px;
+      text-align: center;
+    }
+    h2 {
+      margin-bottom: 20px;
+    }
+    p {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="status-container">
+    <h2>Admission Status</h2>
+    <p id="statusMessage"></p>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const currentClass = localStorage.getItem('currentClass');
+
+      if (currentClass) {
+        document.getElementById('statusMessage').innerText = `You are currently in ${currentClass.toUpperCase()}.`;
+      } else {
+        document.getElementById('statusMessage').innerText = "Your current class is not set.";
+      }
+    });
+   
+  function admissionStatus() {
+    window.location.href = 'admission.html';
+  }
+</script>
+
+  </script>
+</body>
+</html>
+

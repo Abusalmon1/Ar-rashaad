@@ -27,27 +27,26 @@ body {
   /* Set maximum width */
 }
 
-input {
-  display: block;
-  margin: 10px auto;
-  /* Center input fields horizontally */
+.input-container {
+  margin-bottom: 15px;
+}
+
+input, select {
   padding: 10px;
-  width: calc(100% - 20px);
-  /* Set input width */
+  width: 100%;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
 }
 
 button {
-  display: block;
-  margin: 20px auto;
-  /* Center button horizontally */
   padding: 15px 30px;
   background-color: #28a745;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  -webkit-transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease;
 }
 
 button:hover {

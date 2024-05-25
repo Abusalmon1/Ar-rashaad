@@ -171,7 +171,7 @@
         </div>
         <div class="activity">
           <h3>School Portal</h3>
-          <p>Access the school's online portal for students and parents.</p>
+          <p><a href="result-portal.html">Access the school's online portal for students and parents.</a></p>
         </div>
         <div class="activity">
           <h3>More</h3>
@@ -218,11 +218,11 @@
     }
 
     function admissionStatus() {
-      alert('Admission Status selected');
+      window.location.href = 'admission.html'; // Redirect to the admission status page
     }
 
     function schoolPortal() {
-      alert('School Portal selected');
+      window.location.href = 'result-portal.html';
     }
 
     document.getElementsByClassName("dropbtn")[0].addEventListener('click', function() {

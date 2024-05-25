@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exam Results</title>
+  <style>
+    .result-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+      background-color: #f4f4f4;
+      padding: 20px;
+    }
+    .result-container h2 {
+      margin-bottom: 20px;
+    }
+    .result-container button {
+      padding: 10px 20px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    .result-container button:hover {
+      background-color: #218838;
+    }
+    canvas {
+      margin-top: 20px;
+      max-width: 90%;
+    }
+  </style>
+</head>
+<body>
+  <div class="result-container">
+    <h2>Exam Results</h2>
+    <p id="lastResultMessage"></p>
+    <button onclick="goToDashboard()">Go to Dashboard</button>
+    <canvas id="scoreChart"></canvas>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      displayLastResult();
+      displayPastScores();
+    });
+
+    function goToDashboard() {
+      window.location.href = 'dashboard.html';
+    }
+
+    function displayLastResult() {
+      const lastResult = JSON.parse(localStorage.getItem('lastResult'));
+      const message = lastResult 
+        ? `Your last exam was ${lastResult.subject}. You scored ${lastResult.score} out of ${lastResult.total}.` 
+        : 'No recent exam results available.';
+      document.getElementById('lastResultMessage').innerText = message;
+    }
+
+    function displayPastScores() {
+      const ctx = document.getElementById('scoreChart').getContext('2d');
+      let pastScores = JSON.parse(localStorage.getItem('pastScores')) || [];
+      pastScores = pastScores.map(score => ({ ...score, date: new Date(score.date) }));
+      pastScores.sort((a, b) => a.date - b.date);
+
+      const labels = pastScores.map(score => score.date.toDateString());
+      const data = pastScores.map(score => (score.score / score.total) * 100);
+
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: 'Exam Scores (%)',
+            data: data,
+            borderColor: 'rgba(75, 192, 192, 1)',
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            fill: true,
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+              max: 100
+            }
+          }
+        }
+      });
+    }
+  </script>
+</body>
+</html>

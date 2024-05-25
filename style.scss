@@ -6,9 +6,9 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-}
-
-.login-container {
+  }
+  
+  .login-container {
     background: rgba(255, 255, 255, 0.8);
     padding: 20px;
     border-radius: 10px;
@@ -16,39 +16,41 @@ body {
     text-align: center;
     width: 50%; /* Set default width */
     max-width: 400px; /* Set maximum width */
-}
-
-input {
-    display: block;
-    margin: 10px auto; /* Center input fields horizontally */
+  }
+  
+  .input-container {
+    margin-bottom: 15px;
+  }
+  
+  input, select {
     padding: 10px;
-    width: calc(100% - 20px); /* Set input width */
+    width: 100%;
     box-sizing: border-box;
-}
-
-button {
-    display: block;
-    margin: 20px auto; /* Center button horizontally */
+  }
+  
+  button {
     padding: 15px 30px;
     background-color: #28a745;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-}
-
-button:hover {
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
     background-color: #218838;
-}
-
-@media screen and (max-width: 768px) {
+  }
+  
+  @media screen and (max-width: 768px) {
     .login-container {
-        width: 70%; /* Adjust width for smaller screens */
+      width: 70%; /* Adjust width for smaller screens */
     }
-}
-
-@media screen and (max-width: 480px) {
+  }
+  
+  @media screen and (max-width: 480px) {
     .login-container {
-        width: 90%; /* Adjust width for even smaller screens */
+      width: 90%; /* Adjust width for even smaller screens */
     }
-}
+  }
+  

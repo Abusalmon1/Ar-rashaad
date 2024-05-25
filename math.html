@@ -5,117 +5,66 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Math Exam - Ar-Rashaad Academy</title>
   <style>
-   body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    height: 100vh;
-    margin: 0;
-    background-color: #f4f4f4;
-    overflow-y: auto;
-}
-
-.exam-container {
-    background: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 80%;
-    max-width: 800px;
-    margin: 20px 0;
-}
-
-.question {
-    margin-bottom: 20px;
-}
-
-.question p {
-    font-weight: bold;
-}
-
-input[type="radio"] {
-    margin-right: 10px;
-}
-
-button {
-    padding: 10px 20px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    display: block;
-    margin: 20px auto 0;
-}
-
-button:hover {
-    background-color: #218838;
-}
-
-/* Media query for responsiveness */
-@media screen and (max-width: 768px) {
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 100vh;
+      margin: 0;
+      background-color: #f4f4f4;
+      overflow-y: auto;
+    }
     .exam-container {
-        width: 90%; /* Adjust width for smaller screens */
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      width: 80%;
+      max-width: 800px;
+      margin: 20px 0;
     }
-
+    .question {
+      margin-bottom: 20px;
+    }
+    .question p {
+      font-weight: bold;
+    }
     input[type="radio"] {
-        margin-right: 5px; /* Reduce margin for smaller screens */
+      margin-right: 10px;
     }
-
     button {
-        margin: 20px auto; /* Center the button */
+      padding: 10px 20px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      display: block;
+      margin: 20px auto 0;
     }
-}
-
+    button:hover {
+      background-color: #218838;
+    }
+    /* Media query for responsiveness */
+    @media screen and (max-width: 768px) {
+      .exam-container {
+        width: 90%; /* Adjust width for smaller screens */
+      }
+      input[type="radio"] {
+        margin-right: 5px; /* Reduce margin for smaller screens */
+      }
+      button {
+        margin: 20px auto; /* Center the button */
+      }
+    }
   </style>
 </head>
 <body>
   <div class="exam-container">
     <h2>Math Exam - Ar-Rashaad Academy</h2>
-    <form id="mathExamForm">
-      <h1>AR RASHAAD</h1>
-      <h2>legos</h2>
-      <h1>AR RASHAAD</h1>
-      <h2>legos</h2><h1>AR RASHAAD</h1>
-      <h2>legos</h2><h1>AR RASHAAD</h1>
-      <h2>legos</h2>
-      <h1>AR RASHAAD</h1>
-      <h2>legos</h2>
-      <h1>AR RASHAAD</h1>
-      <h2>legos</h2>
-      <h1>AR RASHAAD</h1>
-      <h2>legos</h2>
-      <h1>AR RASHAAD</h1>
-      <h2>legos</h2>
-      <h1>AR RASHAAD</h1>
-      <h2>legos</h2>
-      <h1>AR RASHAAD</h1>
-      <h2>legos</h2>
-      <h1>AR RASHAAD</h1>
-      <h2>legos</h2>
-      <h1>AR RASHAAD</h1>
-      <h2>legos</h2>
-      <h1>AR RASHAAD</h1>
-      <h2>legos</h2>
-      <h1>AR RASHAAD</h1>
-      <h2>legos</h2>
-      <h1>AR RASHAAD</h1>
-      <h2>legos</h2>
-      <h1>AR RASHAAD</h1>
-      <h2>legos</h2>
-      <h1>AR RASHAAD</h1>
-      <h2>legos</h2>
-      <h1>AR RASHAAD</h1>
-      <h2>legos</h2>
-      <h1>AR RASHAAD</h1>
-      <h2>legos</h2>
-      <h1>AR RASHAAD</h1>
-      <h2>legos</h2>
-      <h1>AR RASHAAD</h1>
-      <h2>legos</h2>
-    </form>
+    <form id="mathExamForm"></form>
     <button onclick="submitExam()">Submit Exam</button>
   </div>
   <script>
@@ -161,17 +110,46 @@ button:hover {
     }
 
     function submitExam() {
-      const form = document.getElementById('mathExamForm');
-      const formData = new FormData(form);
-      let score = 0;
+      if (confirm("Are you sure you want to submit the exam?")) {
+        const form = document.getElementById('mathExamForm');
+        const formData = new FormData(form);
+        let score = 0;
 
-      questions.forEach((q, index) => {
-        if (formData.get(`q${index + 1}`) === q.correct) {
-          score++;
+        questions.forEach((q, index) => {
+          if (formData.get(`q${index + 1}`) === q.correct) {
+            score++;
+          }
+        });
+
+        // Save score and total questions to local storage
+        localStorage.setItem('score', score);
+        localStorage.setItem('totalQuestions', questions.length);
+
+        // Promotion logic
+        const currentClass = localStorage.getItem('currentClass');
+        const passingScore = 10;
+        if (score >= passingScore) {
+          const classPromotion = {
+            'ss1': 'ss2',
+            'ss2': 'ss3',
+            'ss3': 'graduate'
+          };
+
+          const nextClass = classPromotion[currentClass];
+
+          if (nextClass) {
+            localStorage.setItem('currentClass', nextClass);
+            alert(`Congratulations! You have passed the exam and are promoted to ${nextClass.toUpperCase()}.`);
+          } else {
+            alert("Congratulations! You have completed all classes and graduated.");
+          }
+        } else {
+          alert("You have not passed the exam. Please study harder and try again.");
         }
-      });
 
-      alert(`You scored ${score} out of ${questions.length}`);
+        // Redirect to the result portal
+        window.location.href = 'result-portal.html';
+      }
     }
 
     document.addEventListener('DOMContentLoaded', loadQuestions);

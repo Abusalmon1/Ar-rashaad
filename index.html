@@ -10,9 +10,21 @@
   <div class="login-container">
     <h2>Ar-Rashaad Academy Exam Login</h2>
     <form id="loginForm">
-      <input type="text" id="schNumber" name="schNumber" placeholder="School Number" required>
-      <input type="text" id="name" name="name" placeholder="Name" required>
-      <input type="text" id="class" name="class" placeholder="Class" required>
+      <div class="input-container">
+        <input type="text" id="schNumber" name="schNumber" placeholder="School Number" required>
+      </div>
+      <div class="input-container">
+        <input type="text" id="name" name="name" placeholder="Name" required>
+      </div>
+      <div class="input-container">
+        <label for="classSelect">Choose your class:</label>
+        <select id="classSelect" required>
+          <option value="">Select Class</option>
+          <option value="ss1">SS1</option>
+          <option value="ss2">SS2</option>
+          <option value="ss3">SS3</option>
+        </select>
+      </div>
       <button type="submit">Login</button>
     </form>
   </div>
@@ -21,12 +33,12 @@
       event.preventDefault();
       const schNumber = document.getElementById('schNumber').value;
       const name = document.getElementById('name').value;
-      const classValue = document.getElementById('class').value;
+      const classValue = document.getElementById('classSelect').value;
 
       if (schNumber && name && classValue) {
         localStorage.setItem('schNumber', schNumber);
         localStorage.setItem('name', name);
-        localStorage.setItem('class', classValue);
+        localStorage.setItem('currentClass', classValue);
         window.location.href = 'dashboard.html';
       } else {
         alert('Please fill in all fields');
