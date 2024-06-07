@@ -49,8 +49,8 @@
 <body>
   <div class="exam-container">
     <!-- First set of questions -->
-    <div class="question-set" id="question-set-1">
-      <h2>Set 1</h2>
+    
+    
         <div class="question">
           <p>1. Solve the quadratic equation: x^2 - 5x + 6 = 0</p>
           <label>
@@ -470,81 +470,35 @@
     </form>
   
   <script>
-   function submitExam() {
-      if (confirm("Are you sure you want to submit the exam?")) {
-        const form = document.createElement('form');
-        const formData = new FormData();
+  
+    
+  function submitExam() {
+    if (confirm("Are you sure you want to submit the exam?")) {
         let score = 0;
-
         const correctAnswers = {
-          q1: 'x=2 or x=3',
-          q2: 'x=4 or x=-1',
-          q3: '40',
-          q4: '28',
-          q5: '3',
-          q6: '20',
-          q7: '2^7',
-          q8: '3^6',
-          q9: '2',
-          q10: '0',
-          q11: 'x=2',
-          q12: '55',
-          q13: '44',
-          q14: '25',
-          q15: '32',
-          q16: '3^5',
-          q17: '3',
-          q18: '90',
-          q19: '4',
-          q20: '64'
-        };
-       
-        
-        for (let question in correctAnswers) {
-          const selectedOption = document.querySelector(`input[name="${question}"]:checked`);
-          if (selectedOption && selectedOption.value === correctAnswers[question]) {
-            score++;
-          }
-        }
-
-        const totalQuestions = Object.keys(correctAnswers).length;
-        localStorage.setItem('score', score);
-        localStorage.setItem('totalQuestions', totalQuestions);
-
-        const passingScore = 10;
-        if (score >= passingScore) {
-          alert(`Congratulations! You have passed the exam with a score of ${score}/${totalQuestions}.`);
-        } else {
-          alert(`You did not pass. Your score is ${score}/${totalQuestions}. Please try again.`);
-        }
-
-        const currentClass = localStorage.getItem('currentClass');
-        const classPromotion = {
-          'ss1': 'ss2',
-          'ss2': 'ss3',
-          'ss3': 'graduate'
+            q1: 'x=2 or x=3',
+            q2: 'x=4 or x=-1',
+            q3: '40',
+            q4: '28',
+            q5: '3',
+            q6: '20',
+            q7: '2^7',
+            q8: '3^6',
+            q9: '2',
+            q10: '0',
+            q11: 'x=2',
+            q12: '55',
+            q13: '44',
+            q14: '25',
+            q15: '32',
+            q16: '3^5',
+            q17: '3',
+            q18: '90',
+            q19: '4',
+            q20: '64'
+            // Add remaining answers here...
         };
 
-        const nextClass = classPromotion[currentClass];
-
-        if (score >= passingScore && nextClass) {
-          localStorage.setItem('currentClass', nextClass);
-          alert(`Congratulations! You have passed the exam and are promoted to ${nextClass.toUpperCase()}.`);
-        } else if (score >= passingScore && !nextClass) {
-          alert("Congratulations! You have completed all classes and graduated.");
-        } else {
-          alert("You have not passed the exam. Please study harder and try again.");
-        }
-
-        
-        window.location.href = 'result-portal.html';
-      }
-    }
-    const correctAnswers = {
-            // your correct answers object...
-        };
-
-        // Calculate the score and store exam results
         for (let question in correctAnswers) {
             const selectedOption = document.querySelector(`input[name="${question}"]:checked`);
             if (selectedOption && selectedOption.value === correctAnswers[question]) {
@@ -559,23 +513,37 @@
             date: new Date().toISOString()
         };
 
-        // Retrieve previous exam scores from localStorage
+        // Store the exam result in localStorage
+        localStorage.setItem('lastResult', JSON.stringify(examResult));
+
         let pastScores = JSON.parse(localStorage.getItem('pastScores')) || [];
         pastScores.push(examResult);
-
-        // Store the updated past scores in localStorage
         localStorage.setItem('pastScores', JSON.stringify(pastScores));
 
-        // Continue with other functionality (pass/fail, class promotion, etc.)
-        // ...
-        // Redirect to result portal after the conditional checks
+        let currentClass = localStorage.getItem('currentClass') || 'ss1';
+        const classPromotion = {
+            'ss1': 'ss2',
+            'ss2': 'ss3',
+            'ss3': 'graduate'
+        };
+
+        const nextClass = classPromotion[currentClass];
+
+        if (score >= 10 && nextClass) {
+            localStorage.setItem('currentClass', nextClass);
+            alert(`Congratulations! You have passed the exam and are promoted to ${nextClass.toUpperCase()}.`);
+        } else if (score >= 10 && !nextClass) {
+            alert("Congratulations! You have completed all classes and graduated.");
+        }
+
+        // Redirect to the result portal
         window.location.href = 'result-portal.html';
-   // Set timeout for automatic redirection
+    }
+}
+    // Set timeout for automatic redirection
     setTimeout(() => {
       window.location.href = 'result-portal.html';
-    }, 3600000); // Redirect after 1 hour (3600000 milliseconds)
-    
-    
+    }, 3600000);
   </script>
 </body>
 </html>

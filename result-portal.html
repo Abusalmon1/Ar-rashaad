@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -41,6 +40,13 @@
   <div class="result-container">
     <h2>Exam Results</h2>
     <p id="lastResultMessage"></p>
+    <!-- Form to display last exam result -->
+    <form id="lastResultForm">
+      <label for="lastExam">Your last exam:</label>
+      <input type="text" id="lastExam" name="lastExam" readonly><br><br>
+      <label for="lastScore">Your score:</label>
+      <input type="text" id="lastScore" name="lastScore" readonly><br><br>
+    </form>
     <button onclick="goToDashboard()">Go to Dashboard</button>
     <canvas id="scoreChart"></canvas>
   </div>
@@ -57,10 +63,13 @@
 
     function displayLastResult() {
       const lastResult = JSON.parse(localStorage.getItem('lastResult'));
-      const message = lastResult 
-        ? `Your last exam was ${lastResult.subject}. You scored ${lastResult.score} out of ${lastResult.total}.` 
-        : 'No recent exam results available.';
-      document.getElementById('lastResultMessage').innerText = message;
+      if (lastResult) {
+        document.getElementById('lastExam').value = lastResult.subject;
+        document.getElementById('lastScore').value = `${lastResult.score}/${lastResult.total}`;
+      } else {
+        document.getElementById('lastExam').value = 'No recent exam';
+        document.getElementById('lastScore').value = 'No recent exam';
+      }
     }
 
     function displayPastScores() {
@@ -94,9 +103,6 @@
         }
       });
     }
-    
-    
-    
   </script>
 </body>
 </html>
