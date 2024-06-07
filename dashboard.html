@@ -14,14 +14,14 @@
       justify-content: flex-start;
       height: 100vh;
       margin: 0;
-      background: url('hqdefault.jpg') no-repeat center center fixed;
+      background: url('libary.jpg') no-repeat center center fixed;
       background-size: cover;
       overflow-y: auto;
     }
     .marquee-container {
       width: 100%;
       overflow: hidden;
-      background-color: #007bff;
+      background-color: brown;
       color: white;
     }
     .marquee h1 {
@@ -33,9 +33,10 @@
       flex-direction: column;
       align-items: center;
       width: 100%;
+      padding: 20px;
     }
     .dashboard-container {
-      background: rgba(255, 255, 255, 0.8); /* Make the background slightly transparent */
+      background: #fff;
       padding: 20px;
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -103,8 +104,8 @@
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       text-align: center;
       margin: 10px;
+      min-width: 250px;
     }
-    
     .modal {
       display: none;
       position: fixed;
@@ -192,6 +193,7 @@
       align-items: center;
       justify-content: center;
       margin-bottom: 20px;
+      flex-wrap: wrap;
     }
     .logo-container img {
       height: 50px;
@@ -215,6 +217,36 @@
     .navigation a:hover {
       background-color: #333;
       color: #fff;
+    }
+
+    @media (max-width: 768px) {
+      .dashboard-container {
+        width: 100%;
+        margin: 10px;
+      }
+      .button-box button {
+        flex: 1 1 100%;
+        margin: 5px 0;
+      }
+      .activities-container {
+        flex-direction: column;
+        align-items: center;
+      }
+      .activity {
+        width: 100%;
+        margin: 10px 0;
+      }
+      .chat-form, .chat-container {
+        width: 90%;
+        margin: 10px 0;
+      }
+      .navigation a {
+        margin: 5px;
+        padding: 10px;
+      }
+      .marquee h1 {
+        font-size: 1.5rem;
+      }
     }
   </style>
 </head>
@@ -280,24 +312,20 @@
         <input type="number" id="examTime" name="examTime" min="1" required>
         <div class="button-box">
           <button type="button" onclick="startExam('math.html')">Math Exam</button>
-          <button onclick="startExam('english')">English Exam</button>
-          <button onclick="startExam('science')">Science Exam</button>
-          <button onclick="startExam('history')">History Exam</button>
+          <button type="button" onclick="startExam('english')">English Exam</button>
+          <button type="button" onclick="startExam('science')">Science Exam</button>
+          <button type="button" onclick="startExam('history')">History Exam</button>
         </div>
       </form>
     </div>
   </div>
-<!-- 
-  <div class="footer">
-    <a href="#">About Ar-Rashaad Academy</a>
-  </div> -->
 
   <div class="chat-form">
     <input type="text" id="userInput" placeholder="Type a message...">
     <button onclick="sendMessage()">Send</button>
   </div>
   <div class="chat-container" id="chatContainer">
-    <!-- Chat messages will appear here -->
+   
   </div>
 
   <script>
@@ -329,8 +357,8 @@
         addMessageToChat(userInput);
         setTimeout(() => {
           addMessageToChat("We'll get back to you soon.");
-        }, 1000); // Simulate a delay for the bot's response
-        // Here you can process the user input further if needed
+          addMessageToChat("Thank you.Ask help from your Teachers")
+        }, 1000); 
         document.getElementById('userInput').value = '';
       }
     }
@@ -341,41 +369,41 @@
       messageElement.classList.add('message');
       messageElement.innerText = message;
       chatContainer.appendChild(messageElement);
-      // Limit the number of messages displayed
+     
       if (chatContainer.children.length > 20) {
         chatContainer.removeChild(chatContainer.firstChild);
       }
-      // Scroll to the bottom of the chat container
+    
       chatContainer.scrollTop = chatContainer.scrollHeight;
     }
-     // Close the modal when the close button is clicked
-  document.querySelectorAll('.close').forEach((closeBtn) => {
-    closeBtn.addEventListener('click', () => {
-      closeModals();
+     
+    document.querySelectorAll('.close').forEach((closeBtn) => {
+      closeBtn.addEventListener('click', () => {
+        closeModals();
+      });
     });
-  });
 
-  // Close the modal when the user clicks outside of it
-  window.addEventListener('click', (event) => {
-    if (event.target.classList.contains('modal')) {
-      closeModals();
+ 
+    window.addEventListener('click', (event) => {
+      if (event.target.classList.contains('modal')) {
+        closeModals();
+      }
+    });
+
+  
+    function closeModals() {
+      document.querySelectorAll('.modal').forEach((modal) => {
+        modal.style.display = 'none';
+      });
     }
-  });
 
-  // Function to close all modals
-  function closeModals() {
-    document.querySelectorAll('.modal').forEach((modal) => {
-      modal.style.display = 'none';
-    });
-  }
-  function startExam(examType) {
-  if (examType === 'math.html') {
-    window.location.href = 'math.html'; // Corrected link to the math exam page
-  } else {
-    // Handle other exam types here
-    alert('Exam not available');
-  }
-}
+    function startExam(examType) {
+      if (examType === 'math.html') {
+        window.location.href = 'math.html'; 
+      } else {
+        alert('Exam not available');
+      }
+    }
   </script>
 </body>
 </html>

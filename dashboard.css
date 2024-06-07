@@ -45,18 +45,6 @@ body {
   width: 100%;
 }
 
-.dashboard-container {
-  background: #fff;
-  padding: 20px;
-  border-radius: 10px;
-  -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: 90%;
-  max-width: 800px;
-  text-align: center;
-  margin: 20px 0;
-}
-
 .button-box {
   display: -webkit-box;
   display: -ms-flexbox;

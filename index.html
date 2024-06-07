@@ -7,22 +7,22 @@
   <link rel="stylesheet" href="style.css">
   <style>
     .message-container {
-      background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+      background-color: rgba(255, 255, 255, 0.9); 
       padding: 10px;
       border-radius: 5px;
       text-align: center;
-      position: fixed; /* Fixed positioning */
-      top: 0; /* Positioned at the top */
-      left: 50%; /* Center horizontally */
-      transform: translateX(-50%); /* Center horizontally */
-      width: 90%; /* Set the width */
-      max-width: 400px; /* Max width to avoid stretching too wide */
+      position: fixed; 
+      top: 0; 
+      left: 50%; 
+      transform: translateX(-50%); 
+      width: 90%;
+      max-width: 400px; 
     }
   </style>
 </head>
 <body>
   <div class="message-container" id="messageContainer">
-    <!-- Messages will be displayed here -->
+    
   </div>
   <div class="login-container">
     <h2>Ar-Rashaad Academy Exam Login</h2>
@@ -47,26 +47,25 @@
   </div>
 
   <script>
-    // Function to display messages sequentially
+
     function displayMessages(messages, index) {
       if (index < messages.length) {
         const messageContainer = document.getElementById('messageContainer');
         messageContainer.innerHTML = messages[index];
         setTimeout(() => {
           displayMessages(messages, index + 1);
-        }, 2000); // Display each message for 2 seconds
+        }, 2000); 
       }
     }
 
-    // Messages to display
+   
     const welcomeMessages = ["Welcome to Ar-Rashaad CBT!", "Are you ready for the exam?", "Just one hour of exam left. Are you prepared?", "Can we start the exam, please?"];
 
-    // Call the function to display messages after the page loads
     window.onload = function() {
       displayMessages(welcomeMessages, 0);
     };
 
-    // Login form submission
+ 
     document.getElementById('loginForm').addEventListener('submit', function(event) {
       event.preventDefault();
       const schNumber = document.getElementById('schNumber').value;

@@ -499,7 +499,7 @@
           q20: '64'
         };
 
-        // Loop through all correct answers and compare with selected answers
+        
         for (let question in correctAnswers) {
           const selectedOption = document.querySelector(`input[name="${question}"]:checked`);
           if (selectedOption && selectedOption.value === correctAnswers[question]) {
@@ -536,7 +536,7 @@
           alert("You have not passed the exam. Please study harder and try again.");
         }
 
-        // Redirect to result portal after the conditional checks
+        
         window.location.href = 'result-portal.html';
       }
     }
