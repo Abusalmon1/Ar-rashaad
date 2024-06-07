@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Math Exam - Ar-Rashaad Academy</title>
   <style>
-    body {
+      body {
       font-family: Arial, sans-serif;
       background-color: #f4f4f4;
       margin: 0;
@@ -43,16 +43,87 @@
     button {
       padding: 10px 20px;
       background-color: #28a745;
-      color: white;
+      color: red;
       border: none;
       border-radius: 5px;
       cursor: pointer;
       margin-top: 20px;
     }
 
-    button:hover {
+    /* button:hover {
       background-color: #218838;
+    } */
+
+
+    /* Styles for the calculator buttons */
+    .calculator-button {
+      width: 50px;
+      height: 50px;
+      margin: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #fff;
+      cursor: pointer;
     }
+
+    /* Styles for the result display */
+    #calc-result {
+      width: calc(100% - 22px); /* Adjusted width to accommodate padding and border */
+      height: 40px;
+      margin: 5px auto;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #fff;
+      text-align: right;
+    }
+/* Existing styles for the calculator container */
+.calculator-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 250px;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+/* Media query for screens up to 768px width */
+@media screen and (max-width: 768px) {
+  /* Adjust calculator container position */
+  .calculator-container {
+    position: static; /* Change position to static to allow scrolling */
+    margin-top: 20px; /* Add margin at the top */
+    width: 200px; /* Decrease width for smaller screens */
+  }
+
+  /* Adjust question set width to accommodate calculator */
+  .question-set {
+    flex: 1 0 calc(50% - 20px); /* Adjust the width for two columns */
+  }
+}
+
+/* Media query for screens up to 480px width */
+@media screen and (max-width: 480px) {
+  /* Further adjustments for even smaller screens */
+  .calculator-container {
+    width: 150px; /* Further decrease width */
+  }
+
+  /* Adjust calculator button size for smaller screens */
+  .calculator-button {
+    width: 30px; /* Decrease button width */
+    height: 30px; /* Decrease button height */
+    font-size: 12px; /* Decrease font size */
+  }
+
+  /* Adjust question set width to accommodate calculator */
+  .question-set {
+    flex: 1 0 100%; /* Full width for single column */
+    margin-right: 0; /* Remove margin-right */
+  }
+}
 
     /* Adjustments for smaller screens */
     @media screen and (max-width: 768px) {
@@ -68,6 +139,39 @@
         margin-right: 0; /* Remove margin-right */
       }
     }
+    @media screen and (max-width: 768px) {
+  .calculator-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 200px; /* Decrease width for smaller screens */
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+  }
+
+  /* Styles for the calculator buttons on smaller screens */
+  .calculator-button {
+    width: 40px; /* Decrease button width */
+    height: 40px; /* Decrease button height */
+    font-size: 14px; /* Decrease font size */
+  }
+}
+
+/* Adjustments for even smaller screens */
+@media screen and (max-width: 480px) {
+  .calculator-container {
+    width: 150px; /* Further decrease width for even smaller screens */
+  }
+
+  /* Styles for the calculator buttons on even smaller screens */
+  .calculator-button {
+    width: 30px; /* Further decrease button width */
+    height: 30px; /* Further decrease button height */
+    font-size: 12px; /* Further decrease font size */
+  }
+}
   </style>
 
 </head>
@@ -76,7 +180,7 @@
     <div class="question-set" id="question-set-1">
       <h2>Set 1</h2>
       <div class="question">uestion">
-          <p>1. Solve the quadratic equation: x^2 - 5x + 6 = 0</p>
+          <p>1. Solve the quadratic<br> equation: x^2 - 5x + 6 = 0</p>
           <label>
             <input type="radio" name="q1" value="x=2 or x=3">
             x=2 or x=3
@@ -96,7 +200,7 @@
         </div>
   
         <div class="question">
-          <p>2. Find the roots of the equation: x^2 + 3x - 4 = 0</p>
+          <p>2. Find the roots of the<br> equation: x^2 + 3x - 4 = 0</p>
           <label>
             <input type="radio" name="q2" value="x=4 or x=-1">
             x=4 or x=-1
@@ -116,7 +220,7 @@
         </div>
   
         <div class="question">
-          <p>3. What is the area of a rectangle with length 8 and width 5?</p>
+          <p>3. What is the area of a<br> rectangle with length 8 and<br> width 5?</p>
           <label>
             <input type="radio" name="q3" value="40">
             40
@@ -136,7 +240,7 @@
         </div>
   
         <div class="question">
-          <p>4. What is the perimeter of a square with side length 7?</p>
+          <p>4. What is the<br> perimeter of a square with side length 7?</p>
           <label>
             <input type="radio" name="q4" value="21">
             21
@@ -156,7 +260,7 @@
         </div>
   
         <div class="question">
-          <p>5. In a Venn diagram, how many regions are there with two overlapping sets?</p>
+          <p>5. In a Venn diagram,<br> how many regions are there with two overlapping sets?</p>
           <label>
             <input type="radio" name="q5" value="2">
             2
@@ -488,7 +592,39 @@
       </div>
         </div>
       </div>
-
+      <div class="calculator-container">
+        <!-- Result display -->
+        <div id="calc-result">0</div>
+        <!-- Calculator buttons -->
+        <div>
+          <button class="calculator-button" onclick="addToCalc('7')">7</button>
+          <button class="calculator-button" onclick="addToCalc('8')">8</button>
+          <button class="calculator-button" onclick="addToCalc('9')">9</button>
+          <button class="calculator-button" onclick="addToCalc('/')">/</button>
+        </div>
+        <div>
+          <button class="calculator-button" onclick="addToCalc('4')">4</button>
+          <button class="calculator-button" onclick="addToCalc('5')">5</button>
+          <button class="calculator-button" onclick="addToCalc('6')">6</button>
+          <button class="calculator-button" onclick="addToCalc('*')">*</button>
+        </div>
+        <div>
+          <button class="calculator-button" onclick="addToCalc('1')">1</button>
+          <button class="calculator-button" onclick="addToCalc('2')">2</button>
+          <button class="calculator-button" onclick="addToCalc('3')">3</button>
+          <button class="calculator-button" onclick="addToCalc('-')">-</button>
+        </div>
+        <div>
+          <button class="calculator-button" onclick="addToCalc('0')">0</button>
+          <button class="calculator-button" onclick="addToCalc('.')">.</button>
+          <button class="calculator-button" onclick="calculate()">=</button>
+          <button class="calculator-button" onclick="addToCalc('+')">+</button>
+        </div>
+        <div>
+          <button class="calculator-button" onclick="clearCalc()">C</button>
+          <button class="calculator-button" onclick="addToCalc('Math.sqrt(')">√</button>
+        </div>
+      </div>
       <button type="button" onclick="submitExam()">Submit Exam</button>
     </form>
     </form>
@@ -568,6 +704,26 @@
     setTimeout(() => {
       window.location.href = 'result-portal.html';
     }, 3600000);
+
+
+    function addToCalc(value) {
+      document.getElementById('calc-result').innerText += value;
+    }
+
+    // Function to clear the calculator display
+    function clearCalc() {
+      document.getElementById('calc-result').innerText = '';
+    }
+
+    // Function to evaluate the expression in the calculator display
+    function calculate() {
+      try {
+        const result = eval(document.getElementById('calc-result').innerText);
+        document.getElementById('calc-result').innerText = result;
+      } catch (error) {
+        document.getElementById('calc-result').innerText = 'Error';
+      }
+    }
   </script>
 </body>
 </html>
