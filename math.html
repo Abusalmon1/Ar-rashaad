@@ -466,67 +466,72 @@
       </div>
 
       <button type="button" onclick="submitExam()">Submit Exam</button>
-
-      <form id="mathExamForm">
-        <!-- Form content goes here -->
-      </form>
-
+    </form>
+    </form>
+  
   <script>
-    function submitExam() {
+   function submitExam() {
       if (confirm("Are you sure you want to submit the exam?")) {
-        const form = document.getElementById('mathExamForm');
-        const formData = new FormData(form);
+        const form = document.createElement('form');
+        const formData = new FormData();
         let score = 0;
 
-        const questions = [
-          { correct: 'x=2 or x=3' },
-          { correct: 'x=1 or x=-4' },
-          { correct: '40' },
-          { correct: '28' },
-          { correct: '3' },
-          { correct: '20' },
-          { correct: '2^7' },
-          { correct: '3^6' },
-          { correct: '2' },
-          { correct: '0' },
-          { correct: 'x=2' },
-          { correct: '55' },
-          { correct: '44' },
-          { correct: '25' },
-          { correct: '32' },
-          { correct: '3^5' },
-          { correct: '3' },
-          { correct: '90' },
-          { correct: '4' },
-          { correct: '64' },
-        ];
+        const correctAnswers = {
+          q1: 'x=2 or x=3',
+          q2: 'x=4 or x=-1',
+          q3: '40',
+          q4: '28',
+          q5: '3',
+          q6: '20',
+          q7: '2^7',
+          q8: '3^6',
+          q9: '2',
+          q10: '0',
+          q11: 'x=2',
+          q12: '55',
+          q13: '44',
+          q14: '25',
+          q15: '32',
+          q16: '3^5',
+          q17: '3',
+          q18: '90',
+          q19: '4',
+          q20: '64'
+        };
 
-        questions.forEach((q, index) => {
-          if (formData.get(`q${index + 1}`) === q.correct) {
+        // Loop through all correct answers and compare with selected answers
+        for (let question in correctAnswers) {
+          const selectedOption = document.querySelector(`input[name="${question}"]:checked`);
+          if (selectedOption && selectedOption.value === correctAnswers[question]) {
             score++;
           }
-        });
+        }
 
+        const totalQuestions = Object.keys(correctAnswers).length;
         localStorage.setItem('score', score);
-        localStorage.setItem('totalQuestions', questions.length);
+        localStorage.setItem('totalQuestions', totalQuestions);
 
-        const currentClass = localStorage.getItem('currentClass');
         const passingScore = 10;
         if (score >= passingScore) {
-          const classPromotion = {
-            'ss1': 'ss2',
-            'ss2': 'ss3',
-            'ss3': 'graduate'
-          };
+          alert(`Congratulations! You have passed the exam with a score of ${score}/${totalQuestions}.`);
+        } else {
+          alert(`You did not pass. Your score is ${score}/${totalQuestions}. Please try again.`);
+        }
 
-          const nextClass = classPromotion[currentClass];
+        const currentClass = localStorage.getItem('currentClass');
+        const classPromotion = {
+          'ss1': 'ss2',
+          'ss2': 'ss3',
+          'ss3': 'graduate'
+        };
 
-          if (nextClass) {
-            localStorage.setItem('currentClass', nextClass);
-            alert(`Congratulations! You have passed the exam and are promoted to ${nextClass.toUpperCase()}.`);
-          } else {
-            alert("Congratulations! You have completed all classes and graduated.");
-          }
+        const nextClass = classPromotion[currentClass];
+
+        if (score >= passingScore && nextClass) {
+          localStorage.setItem('currentClass', nextClass);
+          alert(`Congratulations! You have passed the exam and are promoted to ${nextClass.toUpperCase()}.`);
+        } else if (score >= passingScore && !nextClass) {
+          alert("Congratulations! You have completed all classes and graduated.");
         } else {
           alert("You have not passed the exam. Please study harder and try again.");
         }
@@ -535,10 +540,41 @@
         window.location.href = 'result-portal.html';
       }
     }
+    const correctAnswers = {
+            // your correct answers object...
+        };
 
+        // Calculate the score and store exam results
+        for (let question in correctAnswers) {
+            const selectedOption = document.querySelector(`input[name="${question}"]:checked`);
+            if (selectedOption && selectedOption.value === correctAnswers[question]) {
+                score++;
+            }
+        }
+
+        const totalQuestions = Object.keys(correctAnswers).length;
+        const examResult = {
+            score: score,
+            total: totalQuestions,
+            date: new Date().toISOString()
+        };
+
+        // Retrieve previous exam scores from localStorage
+        let pastScores = JSON.parse(localStorage.getItem('pastScores')) || [];
+        pastScores.push(examResult);
+
+        // Store the updated past scores in localStorage
+        localStorage.setItem('pastScores', JSON.stringify(pastScores));
+
+        // Continue with other functionality (pass/fail, class promotion, etc.)
+        // ...
+        // Redirect to result portal after the conditional checks
+        window.location.href = 'result-portal.html';
+   // Set timeout for automatic redirection
     setTimeout(() => {
-          window.location.href = 'result-portal.html';
-        }, 3600000); // Redirect after 1 hour (3600000 milliseconds)
+      window.location.href = 'result-portal.html';
+    }, 3600000); // Redirect after 1 hour (3600000 milliseconds)
+    
   </script>
 </body>
 </html>
