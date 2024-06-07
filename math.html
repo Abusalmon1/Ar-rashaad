@@ -7,23 +7,21 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      height: 100vh;
-      margin: 0;
       background-color: #f4f4f4;
-      overflow-y: auto;
+      margin: 0;
+      padding: 20px;
     }
     .exam-container {
+      display: flex;
+      justify-content: space-between;
+    }
+    .question-set {
+      flex: 1;
       background: #fff;
       padding: 20px;
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      width: 80%;
-      max-width: 800px;
-      margin: 20px 0;
+      margin-right: 20px;
     }
     .question {
       margin-bottom: 20px;
@@ -41,79 +39,467 @@
       border: none;
       border-radius: 5px;
       cursor: pointer;
-      display: block;
-      margin: 20px auto 0;
+      margin-top: 20px;
     }
     button:hover {
       background-color: #218838;
-    }
-    /* Media query for responsiveness */
-    @media screen and (max-width: 768px) {
-      .exam-container {
-        width: 90%; /* Adjust width for smaller screens */
-      }
-      input[type="radio"] {
-        margin-right: 5px; /* Reduce margin for smaller screens */
-      }
-      button {
-        margin: 20px auto; /* Center the button */
-      }
     }
   </style>
 </head>
 <body>
   <div class="exam-container">
-    <h2>Math Exam - Ar-Rashaad Academy</h2>
-    <form id="mathExamForm"></form>
-    <button onclick="submitExam()">Submit Exam</button>
-  </div>
+    <!-- First set of questions -->
+    <div class="question-set" id="question-set-1">
+      <h2>Set 1</h2>
+        <div class="question">
+          <p>1. Solve the quadratic equation: x^2 - 5x + 6 = 0</p>
+          <label>
+            <input type="radio" name="q1" value="x=2 or x=3">
+            x=2 or x=3
+          </label><br>
+          <label>
+            <input type="radio" name="q1" value="x=1 or x=6">
+            x=1 or x=6
+          </label><br>
+          <label>
+            <input type="radio" name="q1" value="x=-2 or x=3">
+            x=-2 or x=3
+          </label><br>
+          <label>
+            <input type="radio" name="q1" value="x=-1 or x=-6">
+            x=-1 or x=-6
+          </label>
+        </div>
+  
+        <div class="question">
+          <p>2. Find the roots of the equation: x^2 + 3x - 4 = 0</p>
+          <label>
+            <input type="radio" name="q2" value="x=4 or x=-1">
+            x=4 or x=-1
+          </label><br>
+          <label>
+            <input type="radio" name="q2" value="x=-4 or x=1">
+            x=-4 or x=1
+          </label><br>
+          <label>
+            <input type="radio" name="q2" value="x=2 or x=-2">
+            x=2 or x=-2
+          </label><br>
+          <label>
+            <input type="radio" name="q2" value="x=-3 or x=4">
+            x=-3 or x=4
+          </label>
+        </div>
+  
+        <div class="question">
+          <p>3. What is the area of a rectangle with length 8 and width 5?</p>
+          <label>
+            <input type="radio" name="q3" value="40">
+            40
+          </label><br>
+          <label>
+            <input type="radio" name="q3" value="45">
+            45
+          </label><br>
+          <label>
+            <input type="radio" name="q3" value="35">
+            35
+          </label><br>
+          <label>
+            <input type="radio" name="q3" value="30">
+            30
+          </label>
+        </div>
+  
+        <div class="question">
+          <p>4. What is the perimeter of a square with side length 7?</p>
+          <label>
+            <input type="radio" name="q4" value="21">
+            21
+          </label><br>
+          <label>
+            <input type="radio" name="q4" value="28">
+            28
+          </label><br>
+          <label>
+            <input type="radio" name="q4" value="14">
+            14
+          </label><br>
+          <label>
+            <input type="radio" name="q4" value="35">
+            35
+          </label>
+        </div>
+  
+        <div class="question">
+          <p>5. In a Venn diagram, how many regions are there with two overlapping sets?</p>
+          <label>
+            <input type="radio" name="q5" value="2">
+            2
+          </label><br>
+          <label>
+            <input type="radio" name="q5" value="3">
+            3
+          </label><br>
+          <label>
+            <input type="radio" name="q5" value="4">
+            4
+          </label><br>
+          <label>
+            <input type="radio" name="q5" value="5">
+            5
+          </label>
+        </div>
+  
+        <div class="question">
+          <p>6. In Venn diagram, if set A has 10 elements and set B has 15 elements and they have 5 elements in common, how many elements are in the union of A and B?</p>
+          <label>
+            <input type="radio" name="q6" value="20">
+            20
+          </label><br>
+          <label>
+            <input type="radio" name="q6" value="25">
+            25
+          </label><br>
+          <label>
+            <input type="radio" name="q6" value="30">
+            30
+          </label><br>
+          <label>
+            <input type="radio" name="q6" value="15">
+            15
+          </label>
+        </div>
+
+        </div>
+      </div>
+
+      <div class="question-set" id="question-set-2">
+        <h2>Set 2</h2>
+          <p>7. Simplify: 2^3 * 2^4</p>
+          <label>
+            <input type="radio" name="q7" value="2^7">
+            2^7
+          </label><br>
+          <label>
+            <input type="radio" name="q7" value="2^12">
+            2^12
+          </label><br>
+          <label>
+            <input type="radio" name="q7" value="2^1">
+            2^1
+          </label><br>
+          <label>
+            <input type="radio" name="q7" value="2^4">
+            2^4
+          </label>
+        </div>
+  
+        <div class="question">
+          <p>8. Simplify: (3^2)^3</p>
+          <label>
+            <input type="radio" name="q8" value="3^5">
+            3^5
+          </label><br>
+          <label>
+            <input type="radio" name="q8" value="3^6">
+            3^6
+          </label><br>
+          <label>
+            <input type="radio" name="q8" value="3^9">
+            3^9
+          </label><br>
+          <label>
+            <input type="radio" name="q8" value="3^12">
+            3^12
+          </label>
+        </div>
+  
+        <div class="question">
+          <p>9. What is log(100) base 10?</p>
+          <label>
+            <input type="radio" name="q9" value="1">
+            1
+          </label><br>
+          <label>
+            <input type="radio" name="q9" value="2">
+            2
+          </label><br>
+          <label>
+            <input type="radio" name="q9" value="3">
+            3
+          </label><br>
+          <label>
+            <input type="radio" name="q9" value="4">
+            4
+          </label>
+        </div>
+  
+        <div class="question">
+          <p>10. What is the value of log(1) base 10?</p>
+          <label>
+            <input type="radio" name="q10" value="0">
+            0
+          </label><br>
+          <label>
+            <input type="radio" name="q10" value="1">
+            1
+          </label><br>
+          <label>
+            <input type="radio" name="q10" value="10">
+            10
+          </label><br>
+          <label>
+            <input type="radio" name="q10" value="-1">
+            -1
+          </label>
+        </div>
+  
+        <div class="question">
+          <p>11. Solve for x: 5x - 7 = 3</p>
+          <label>
+            <input type="radio" name="q11" value="x=1">
+            x=1
+          </label><br>
+          <label>
+            <input type="radio" name="q11" value="x=2">
+            x=2
+          </label><br>
+          <label>
+            <input type="radio" name="q11" value="x=3">
+            x=3
+          </label><br>
+          <label>
+            <input type="radio" name="q11" value="x=4">
+            x=4
+          </label>
+        </div>
+  
+        <div class="question">
+          <p>12. What is the sum of the first 10 natural numbers?</p>
+          <label>
+            <input type="radio" name="q12" value="45">
+            45
+          </label><br>
+          <label>
+            <input type="radio" name="q12" value="50">
+            50
+          </label><br>
+          <label>
+            <input type="radio" name="q12" value="55">
+            55
+          </label><br>
+          <label>
+            <input type="radio" name="q12" value="60">
+            60
+          </label>
+        </div>
+  
+        <div class="question">
+          <p>13. If the radius of a circle is 7, what is its circumference? (Use π = 22/7)</p>
+          <label>
+            <input type="radio" name="q13" value="22">
+            22
+          </label><br>
+          <label>
+            <input type="radio" name="q13" value="44">
+            44
+          </label><br>
+          <label>
+            <input type="radio" name="q13" value="154">
+            154
+          </label><br>
+          <label>
+            <input type="radio" name="q13" value="28">
+            28
+          </label>
+        </div>
+          
+        </div>
+      </div>
+
+      <!-- Third set of questions -->
+      <div class="question-set" id="question-set-3">
+        <h2>Set 3</h2>
+         
+          
+      <div class="question">
+        <p>14. What is the area of a triangle with base 10 and height 5?</p>
+        <label>
+          <input type="radio" name="q14" value="25">
+          25
+        </label><br>
+        <label>
+          <input type="radio" name="q14" value="30">
+          30
+        </label><br>
+        <label>
+          <input type="radio" name="q14" value="35">
+          35
+        </label><br>
+        <label>
+          <input type="radio" name="q14" value="40">
+          40
+        </label>
+      </div>
+
+      <div class="question">
+        <p>15. What is 2^5?</p>
+        <label>
+          <input type="radio" name="q15" value="16">
+          16
+        </label><br>
+        <label>
+          <input type="radio" name="q15" value="32">
+          32
+        </label><br>
+        <label>
+          <input type="radio" name="q15" value="64">
+          64
+        </label><br>
+        <label>
+          <input type="radio" name="q15" value="128">
+          128
+        </label>
+      </div>
+
+      <div class="question">
+        <p>16. Simplify: 3^3 * 3^2</p>
+        <label>
+          <input type="radio" name="q16" value="3^5">
+          3^5
+        </label><br>
+        <label>
+          <input type="radio" name="q16" value="3^6">
+          3^6
+        </label><br>
+        <label>
+          <input type="radio" name="q16" value="3^8">
+          3^8
+        </label><br>
+        <label>
+          <input type="radio" name="q16" value="3^9">
+          3^9
+        </label>
+      </div>
+
+      <div class="question">
+        <p>17. What is the cube root of 27?</p>
+        <label>
+          <input type="radio" name="q17" value="2">
+          2
+        </label><br>
+        <label>
+          <input type="radio" name="q17" value="3">
+          3
+        </label><br>
+        <label>
+          <input type="radio" name="q17" value="4">
+          4
+        </label><br>
+        <label>
+          <input type="radio" name="q17" value="5">
+          5
+        </label>
+      </div>
+
+      <div class="question">
+        <p>18. If the angles of a triangle are 30°, 60°, and __°, what is the third angle?</p>
+        <label>
+          <input type="radio" name="q18" value="60">
+          60
+        </label><br>
+        <label>
+          <input type="radio" name="q18" value="90">
+          90
+        </label><br>
+        <label>
+          <input type="radio" name="q18" value="120">
+          120
+        </label><br>
+        <label>
+          <input type="radio" name="q18" value="150">
+          150
+        </label>
+      </div>
+
+      <div class="question">
+        <p>19. What is the value of x in the equation 2x + 3 = 11?</p>
+        <label>
+          <input type="radio" name="q19" value="2">
+          2
+        </label><br>
+        <label>
+          <input type="radio" name="q19" value="3">
+          3
+        </label><br>
+        <label>
+          <input type="radio" name="q19" value="4">
+          4
+        </label><br>
+        <label>
+          <input type="radio" name="q19" value="5">
+          5
+        </label>
+      </div>
+
+      <div class="question">
+        <p>20. What is the volume of a cube with side length 4?</p>
+        <label>
+          <input type="radio" name="q20" value="16">
+          16
+        </label><br>
+        <label>
+          <input type="radio" name="q20" value="32">
+          32
+        </label><br>
+        <label>
+          <input type="radio" name="q20" value="64">
+          64
+        </label><br>
+        <label>
+          <input type="radio" name="q20" value="128">
+          128
+        </label>
+      </div>
+        </div>
+      </div>
+
+      <button type="button" onclick="submitExam()">Submit Exam</button>
+
+      <form id="mathExamForm">
+        <!-- Form content goes here -->
+      </form>
+
   <script>
-    const questions = [
-      { question: 'Solve the quadratic equation: x^2 - 5x + 6 = 0', answers: ['x=2 or x=3', 'x=1 or x=6', 'x=-2 or x=3', 'x=-1 or x=-6'], correct: 'x=2 or x=3' },
-      { question: 'Find the roots of the equation: x^2 + 3x - 4 = 0', answers: ['x=4 or x=-1', 'x=-4 or x=1', 'x=2 or x=-2', 'x=-3 or x=4'], correct: 'x=1 or x=-4' },
-      { question: 'What is the area of a rectangle with length 8 and width 5?', answers: ['40', '45', '35', '30'], correct: '40' },
-      { question: 'What is the perimeter of a square with side length 7?', answers: ['21', '28', '14', '35'], correct: '28' },
-      { question: 'In a Venn diagram, how many regions are there with two overlapping sets?', answers: ['2', '3', '4', '5'], correct: '3' },
-      { question: 'In Venn diagram, if set A has 10 elements and set B has 15 elements and they have 5 elements in common, how many elements are in the union of A and B?', answers: ['20', '25', '30', '15'], correct: '20' },
-      { question: 'Simplify: 2^3 * 2^4', answers: ['2^7', '2^12', '2^1', '2^4'], correct: '2^7' },
-      { question: 'Simplify: (3^2)^3', answers: ['3^5', '3^6', '3^9', '3^12'], correct: '3^6' },
-      { question: 'What is log(100) base 10?', answers: ['1', '2', '3', '4'], correct: '2' },
-      { question: 'What is the value of log(1) base 10?', answers: ['0', '1', '10', '-1'], correct: '0' },
-      { question: 'Solve for x: 5x - 7 = 3', answers: ['x=1', 'x=2', 'x=3', 'x=4'], correct: 'x=2' },
-      { question: 'What is the sum of the first 10 natural numbers?', answers: ['45', '50', '55', '60'], correct: '55' },
-      { question: 'If the radius of a circle is 7, what is its circumference? (Use π = 22/7)', answers: ['22', '44', '154', '28'], correct: '44' },
-      { question: 'What is the area of a triangle with base 10 and height 5?', answers: ['25', '30', '35', '40'], correct: '25' },
-      { question: 'What is 2^5?', answers: ['16', '32', '64', '128'], correct: '32' },
-      { question: 'Simplify: 3^3 * 3^2', answers: ['3^5', '3^6', '3^8', '3^9'], correct: '3^5' },
-      { question: 'What is the cube root of 27?', answers: ['2', '3', '4', '5'], correct: '3' },
-      { question: 'If the angles of a triangle are 30°, 60°, and __°, what is the third angle?', answers: ['60', '90', '120', '150'], correct: '90' },
-      { question: 'What is the value of x in the equation 2x + 3 = 11?', answers: ['2', '3', '4', '5'], correct: '4' },
-      { question: 'What is the volume of a cube with side length 4?', answers: ['16', '32', '64', '128'], correct: '64' },
-    ];
-
-    function loadQuestions() {
-      const form = document.getElementById('mathExamForm');
-      questions.forEach((q, index) => {
-        const questionDiv = document.createElement('div');
-        questionDiv.classList.add('question');
-        questionDiv.innerHTML = `
-          <p>${index + 1}. ${q.question}</p>
-          ${q.answers.map((answer, i) => `
-            <label>
-              <input type="radio" name="q${index + 1}" value="${answer}">
-              ${answer}
-            </label>
-          `).join('<br>')}
-        `;
-        form.appendChild(questionDiv);
-      });
-    }
-
     function submitExam() {
       if (confirm("Are you sure you want to submit the exam?")) {
         const form = document.getElementById('mathExamForm');
         const formData = new FormData(form);
         let score = 0;
+
+        const questions = [
+          { correct: 'x=2 or x=3' },
+          { correct: 'x=1 or x=-4' },
+          { correct: '40' },
+          { correct: '28' },
+          { correct: '3' },
+          { correct: '20' },
+          { correct: '2^7' },
+          { correct: '3^6' },
+          { correct: '2' },
+          { correct: '0' },
+          { correct: 'x=2' },
+          { correct: '55' },
+          { correct: '44' },
+          { correct: '25' },
+          { correct: '32' },
+          { correct: '3^5' },
+          { correct: '3' },
+          { correct: '90' },
+          { correct: '4' },
+          { correct: '64' },
+        ];
 
         questions.forEach((q, index) => {
           if (formData.get(`q${index + 1}`) === q.correct) {
@@ -121,11 +507,9 @@
           }
         });
 
-        // Save score and total questions to local storage
         localStorage.setItem('score', score);
         localStorage.setItem('totalQuestions', questions.length);
 
-        // Promotion logic
         const currentClass = localStorage.getItem('currentClass');
         const passingScore = 10;
         if (score >= passingScore) {
@@ -147,12 +531,73 @@
           alert("You have not passed the exam. Please study harder and try again.");
         }
 
-        // Redirect to the result portal
         window.location.href = 'result-portal.html';
       }
     }
+    function submitExam() {
+  if (confirm("Are you sure you want to submit the exam?")) {
+    const form = document.getElementById('mathExamForm');
+    const formData = new FormData(form);
+    let score = 0;
 
-    document.addEventListener('DOMContentLoaded', loadQuestions);
+    const questions = [
+      { correct: 'x=2 or x=3' },
+      { correct: 'x=1 or x=-4' },
+      { correct: '40' },
+      { correct: '28' },
+      { correct: '3' },
+      { correct: '20' },
+      { correct: '2^7' },
+      { correct: '3^6' },
+      { correct: '2' },
+      { correct: '0' },
+      { correct: 'x=2' },
+      { correct: '55' },
+      { correct: '44' },
+      { correct: '25' },
+      { correct: '32' },
+      { correct: '3^5' },
+      { correct: '3' },
+      { correct: '90' },
+      { correct: '4' },
+      { correct: '64' },
+    ];
+
+    questions.forEach((q, index) => {
+      if (formData.get(`q${index + 1}`) === q.correct) {
+        score++;
+      }
+    });
+
+    localStorage.setItem('score', score);
+    localStorage.setItem('totalQuestions', questions.length);
+
+    const currentClass = localStorage.getItem('currentClass');
+    const passingScore = 10;
+    if (score >= passingScore) {
+      const classPromotion = {
+        'ss1': 'ss2',
+        'ss2': 'ss3',
+        'ss3': 'graduate'
+      };
+
+      const nextClass = classPromotion[currentClass];
+
+      if (nextClass) {
+        localStorage.setItem('currentClass', nextClass);
+        alert(`Congratulations! You have passed the exam and are promoted to ${nextClass.toUpperCase()}.`);
+      } else {
+        alert("Congratulations! You have completed all classes and graduated.");
+      }
+    } else {
+      alert("You have not passed the exam. Please study harder and try again.");
+    }
+
+    // Redirect to result portal after the conditional checks
+    window.location.href = 'result-portal.html';
+  }
+}
+
   </script>
 </body>
 </html>

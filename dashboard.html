@@ -14,7 +14,8 @@
       justify-content: flex-start;
       height: 100vh;
       margin: 0;
-      background-color: #f4f4f4;
+      background: url('hqdefault.jpg') no-repeat center center fixed;
+      background-size: cover;
       overflow-y: auto;
     }
     .marquee-container {
@@ -34,7 +35,7 @@
       width: 100%;
     }
     .dashboard-container {
-      background: #fff;
+      background: rgba(255, 255, 255, 0.8); /* Make the background slightly transparent */
       padding: 20px;
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -103,7 +104,7 @@
       text-align: center;
       margin: 10px;
     }
-    /* Modal Styles */
+    
     .modal {
       display: none;
       position: fixed;
@@ -138,6 +139,83 @@
       text-decoration: none;
       cursor: pointer;
     }
+    .footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 20px 0;
+      width: 100%;
+      position: fixed;
+      bottom: 0;
+    }
+    .chat-form {
+      width: 100%;
+      max-width: 400px;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      margin-top: 50px;
+    }
+    .chat-form input[type="text"] {
+      width: calc(100% - 20px);
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .chat-form button {
+      width: 100%;
+      padding: 10px;
+      background-color: #28a745;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .chat-container {
+      width: 100%;
+      max-width: 400px;
+      background-color: #f9f9f9;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      margin-top: 20px;
+      overflow-y: auto;
+      max-height: 300px;
+    }
+    .message {
+      margin-bottom: 10px;
+    }
+    .logo-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .logo-container img {
+      height: 50px;
+      margin-right: 10px;
+    }
+    .navigation {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .navigation a {
+      padding: 10px 20px;
+      margin: 0 5px;
+      color: #333;
+      text-decoration: none;
+      border-radius: 5px;
+      border: 1px solid #333;
+      transition: background-color 0.3s ease;
+    }
+    .navigation a:hover {
+      background-color: #333;
+      color: #fff;
+    }
   </style>
 </head>
 <body>
@@ -148,6 +226,17 @@
   </div>
   <div class="container">
     <div class="dashboard-container">
+      <div class="logo-container">
+        <img src="WIN_20240606_16_37_17_Pro.jpg" alt="Ar-Rashaad Academy">
+        <div class="navigation">
+          <a href="#">Home</a>
+          <a href="#">About</a>
+          <a href="#">Campus</a>
+          <a href="#">Resources</a>
+          <a href="#">School Stories</a>
+          <a href="#">Enroll Now</a>
+        </div>
+      </div>
       <h2>Welcome to the Dashboard</h2>
       <p id="welcomeMessage"></p>
       <div class="button-box">
@@ -181,26 +270,34 @@
     </div>
   </div>
 
-  <!-- CBT Mode Modal -->
   <div id="cbtModal" class="modal">
     <div class="modal-content">
       <span class="close">&times;</span>
-      <h2>CBT Mode</h2>
       <form id="cbtForm">
         <label for="numQuestions">Number of Questions:</label>
         <input type="number" id="numQuestions" name="numQuestions" min="1" max="20" required>
         <label for="examTime">Exam Time (minutes):</label>
         <input type="number" id="examTime" name="examTime" min="1" required>
         <div class="button-box">
-          <button type="button" onclick="startExam('math')">Math Exam</button>
-          <button type="button" onclick="startExam('english')">English Exam</button>
-          <button type="button" onclick="startExam('chemistry')">Chemistry Exam</button>
-          <button type="button" onclick="startExam('physics')">Physics Exam</button>
-          <button type="button" onclick="startExam('biology')">Biology Exam</button>
-          <button type="button" onclick="startExam('civic')">Civic Exam</button>
+          <button type="button" onclick="startExam('math.html')">Math Exam</button>
+          <button onclick="startExam('english')">English Exam</button>
+          <button onclick="startExam('science')">Science Exam</button>
+          <button onclick="startExam('history')">History Exam</button>
         </div>
       </form>
     </div>
+  </div>
+<!-- 
+  <div class="footer">
+    <a href="#">About Ar-Rashaad Academy</a>
+  </div> -->
+
+  <div class="chat-form">
+    <input type="text" id="userInput" placeholder="Type a message...">
+    <button onclick="sendMessage()">Send</button>
+  </div>
+  <div class="chat-container" id="chatContainer">
+    <!-- Chat messages will appear here -->
   </div>
 
   <script>
@@ -211,6 +308,7 @@
 
     function cbtMode() {
       document.getElementById('cbtModal').style.display = 'block';
+      addMessageToChat("Hi there! How can I assist you with CBT?");
     }
 
     function practiceMode() {
@@ -218,50 +316,66 @@
     }
 
     function admissionStatus() {
-      window.location.href = 'admission.html'; // Redirect to the admission status page
+      window.location.href = 'admission.html'; 
     }
 
     function schoolPortal() {
       window.location.href = 'result-portal.html';
     }
 
-    document.getElementsByClassName("dropbtn")[0].addEventListener('click', function() {
-      document.getElementsByClassName("dropdown-content")[0].classList.toggle("show");
+    function sendMessage() {
+      const userInput = document.getElementById('userInput').value;
+      if (userInput.trim() !== '') {
+        addMessageToChat(userInput);
+        setTimeout(() => {
+          addMessageToChat("We'll get back to you soon.");
+        }, 1000); // Simulate a delay for the bot's response
+        // Here you can process the user input further if needed
+        document.getElementById('userInput').value = '';
+      }
+    }
+
+    function addMessageToChat(message) {
+      const chatContainer = document.getElementById('chatContainer');
+      const messageElement = document.createElement('div');
+      messageElement.classList.add('message');
+      messageElement.innerText = message;
+      chatContainer.appendChild(messageElement);
+      // Limit the number of messages displayed
+      if (chatContainer.children.length > 20) {
+        chatContainer.removeChild(chatContainer.firstChild);
+      }
+      // Scroll to the bottom of the chat container
+      chatContainer.scrollTop = chatContainer.scrollHeight;
+    }
+     // Close the modal when the close button is clicked
+  document.querySelectorAll('.close').forEach((closeBtn) => {
+    closeBtn.addEventListener('click', () => {
+      closeModals();
     });
+  });
 
-    window.onclick = function(event) {
-      if (!event.target.matches('.dropbtn')) {
-        var dropdowns = document.getElementsByClassName("dropdown-content");
-        for (var i = 0; i < dropdowns.length; i++) {
-          var openDropdown = dropdowns[i];
-          if (openDropdown.classList.contains('show')) {
-            openDropdown.classList.remove('show');
-          }
-        }
-      }
+  // Close the modal when the user clicks outside of it
+  window.addEventListener('click', (event) => {
+    if (event.target.classList.contains('modal')) {
+      closeModals();
     }
+  });
 
-    // CBT Modal functionality
-    const modal = document.getElementById('cbtModal');
-    const span = document.getElementsByClassName('close')[0];
-
-    span.onclick = function() {
+  // Function to close all modals
+  function closeModals() {
+    document.querySelectorAll('.modal').forEach((modal) => {
       modal.style.display = 'none';
-    }
-
-    window.onclick = function(event) {
-      if (event.target == modal) {
-        modal.style.display = 'none';
-      }
-    }
-
-    function startExam(subject) {
-      const numQuestions = document.getElementById('numQuestions').value;
-      const examTime = document.getElementById('examTime').value;
-      alert(`Starting ${subject} exam with ${numQuestions} questions and ${examTime} minutes.`);
-      // Redirect to the corresponding exam page
-      window.location.href = `${subject}.html?numQuestions=${numQuestions}&examTime=${examTime}`;
-    }
+    });
+  }
+  function startExam(examType) {
+  if (examType === 'math.html') {
+    window.location.href = 'math.html'; // Corrected link to the math exam page
+  } else {
+    // Handle other exam types here
+    alert('Exam not available');
+  }
+}
   </script>
 </body>
 </html>

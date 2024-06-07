@@ -22,9 +22,7 @@ body {
           box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   text-align: center;
   width: 50%;
-  /* Set default width */
   max-width: 400px;
-  /* Set maximum width */
 }
 
 .input-container {
@@ -56,14 +54,12 @@ button:hover {
 @media screen and (max-width: 768px) {
   .login-container {
     width: 70%;
-    /* Adjust width for smaller screens */
   }
 }
 
 @media screen and (max-width: 480px) {
   .login-container {
     width: 90%;
-    /* Adjust width for even smaller screens */
   }
 }
 /*# sourceMappingURL=style.css.map */
