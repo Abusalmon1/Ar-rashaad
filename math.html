@@ -531,73 +531,14 @@
           alert("You have not passed the exam. Please study harder and try again.");
         }
 
+        // Redirect to result portal after the conditional checks
         window.location.href = 'result-portal.html';
       }
     }
-    function submitExam() {
-  if (confirm("Are you sure you want to submit the exam?")) {
-    const form = document.getElementById('mathExamForm');
-    const formData = new FormData(form);
-    let score = 0;
 
-    const questions = [
-      { correct: 'x=2 or x=3' },
-      { correct: 'x=1 or x=-4' },
-      { correct: '40' },
-      { correct: '28' },
-      { correct: '3' },
-      { correct: '20' },
-      { correct: '2^7' },
-      { correct: '3^6' },
-      { correct: '2' },
-      { correct: '0' },
-      { correct: 'x=2' },
-      { correct: '55' },
-      { correct: '44' },
-      { correct: '25' },
-      { correct: '32' },
-      { correct: '3^5' },
-      { correct: '3' },
-      { correct: '90' },
-      { correct: '4' },
-      { correct: '64' },
-    ];
-
-    questions.forEach((q, index) => {
-      if (formData.get(`q${index + 1}`) === q.correct) {
-        score++;
-      }
-    });
-
-    localStorage.setItem('score', score);
-    localStorage.setItem('totalQuestions', questions.length);
-
-    const currentClass = localStorage.getItem('currentClass');
-    const passingScore = 10;
-    if (score >= passingScore) {
-      const classPromotion = {
-        'ss1': 'ss2',
-        'ss2': 'ss3',
-        'ss3': 'graduate'
-      };
-
-      const nextClass = classPromotion[currentClass];
-
-      if (nextClass) {
-        localStorage.setItem('currentClass', nextClass);
-        alert(`Congratulations! You have passed the exam and are promoted to ${nextClass.toUpperCase()}.`);
-      } else {
-        alert("Congratulations! You have completed all classes and graduated.");
-      }
-    } else {
-      alert("You have not passed the exam. Please study harder and try again.");
-    }
-
-    // Redirect to result portal after the conditional checks
-    window.location.href = 'result-portal.html';
-  }
-}
-
+    setTimeout(() => {
+          window.location.href = 'result-portal.html';
+        }, 3600000); // Redirect after 1 hour (3600000 milliseconds)
   </script>
 </body>
 </html>
