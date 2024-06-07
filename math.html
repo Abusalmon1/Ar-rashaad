@@ -11,27 +11,35 @@
       margin: 0;
       padding: 20px;
     }
+
     .exam-container {
       display: flex;
-      justify-content: space-between;
+      flex-wrap: wrap; /* Allow flex items to wrap to the next line */
+      flex-direction: row;
     }
+
     .question-set {
-      flex: 1;
+      flex: 1 0 calc(33.33% - 20px); /* Adjust the width for three columns */
       background: #fff;
       padding: 20px;
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       margin-right: 20px;
+      margin-bottom: 20px; /* Add margin at the bottom for spacing */
     }
+
     .question {
       margin-bottom: 20px;
     }
+
     .question p {
       font-weight: bold;
     }
+
     input[type="radio"] {
       margin-right: 10px;
     }
+
     button {
       padding: 10px 20px;
       background-color: #28a745;
@@ -41,17 +49,33 @@
       cursor: pointer;
       margin-top: 20px;
     }
+
     button:hover {
       background-color: #218838;
     }
+
+    /* Adjustments for smaller screens */
+    @media screen and (max-width: 768px) {
+      .question-set {
+        flex: 1 0 calc(50% - 20px); /* Adjust the width for two columns */
+      }
+    }
+
+    /* Adjustments for even smaller screens */
+    @media screen and (max-width: 480px) {
+      .question-set {
+        flex: 1 0 100%; /* Full width for single column */
+        margin-right: 0; /* Remove margin-right */
+      }
+    }
   </style>
+
 </head>
 <body>
   <div class="exam-container">
-    <!-- First set of questions -->
-    
-    
-        <div class="question">
+    <div class="question-set" id="question-set-1">
+      <h2>Set 1</h2>
+      <div class="question">uestion">
           <p>1. Solve the quadratic equation: x^2 - 5x + 6 = 0</p>
           <label>
             <input type="radio" name="q1" value="x=2 or x=3">
