@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Resources</title>
+    <link rel="stylesheet" href="resources.css">
+    
+</head>
+<body>
+    <header class="header">
+        <nav>
+            <a href="#">Resources</a>
+            <div class="nav-links" id="navlink">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Courses</a></li>
+                    <li><a href="#">Resources</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <i class="fa fa-bars" id="menu-open" onclick="toggleMenu()"></i>
+            <i class="fa fa-times" id="menu-close" onclick="toggleMenu()"></i>
+        </nav>
+        <div class="text-box">
+            <h1>School Resources</h1>
+            <p>Access a wealth of educational resources to support your learning journey.</p>
+        </div>
+    </header>
+
+    <section class="resources-section">
+        <div class="container">
+            <h2>Our Resources</h2>
+            <div class="resource-cards">
+                <div class="resource-card">
+                    <img src="ebook.webp" alt="E-book">
+                    <h3>E-books</h3>
+                    <p>Download a variety of e-books covering different subjects.</p>
+                    <a href="#" class="resource-btn">Explore E-books</a>
+                </div>
+                <div class="resource-card">
+                    <img src="vide.webp" alt="Video Tutorials">
+                    <h3>Video Tutorials</h3>
+                    <p>Watch video tutorials for in-depth understanding of topics.</p>
+                    <a href="#" class="resource-btn">Watch Videos</a>
+                </div>
+                <div class="resource-card">
+                    <img src="art.webp" alt="Articles">
+                    <h3>Articles</h3>
+                    <p>Read articles written by experts in various fields.</p>
+                    <a href="#" class="resource-btn">Read Articles</a>
+                </div>
+                <div class="resource-card">
+                    <img src="study.jpeg" alt="Study Guides">
+                    <h3>Study Guides</h3>
+                    <p>Access comprehensive study guides to assist your studies.</p>
+                    <a href="#" class="resource-btn">View Guides</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-links">
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-social">
+                <div class="social-links">
+                    <a href="#">Facebook</a>
+                    <a href="#">Twitter</a>
+                    <a href="#">Instagram</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        var navlink = document.getElementById('navlink');
+        var menuOpenIcon = document.getElementById('menu-open');
+        var menuCloseIcon = document.getElementById('menu-close');
+
+        function toggleMenu() {
+            navlink.classList.toggle('active');
+            if (navlink.classList.contains('active')) {
+                menuOpenIcon.style.display = 'none';
+                menuCloseIcon.style.display = 'block';
+            } else {
+                menuOpenIcon.style.display = 'block';
+                menuCloseIcon.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

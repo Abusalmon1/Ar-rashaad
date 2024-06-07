@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Campus</title>
+    <link rel="stylesheet" href="campus.css">
+    
+</head>
+<body>
+    <header class="header">
+        <nav>
+            <a href="#">OUR CAMPUS</a>
+            <div class="nav-links" id="navlink">
+                <ul>
+                    <li><a href="dashboard.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="#">Courses</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <i class="fa fa-bars" id="menu-open" onclick="toggleMenu()"></i>
+            <i class="fa fa-times" id="menu-close" onclick="toggleMenu()"></i>
+        </nav>
+        <div class="text-box">
+            <h1>Welcome to Our School Campus</h1>
+            <p>Explore the beautiful blend of modern education and traditional values.</p>
+            <a href="#" class="hero-btn">Learn More</a>
+        </div>
+    </header>
+
+    <section class="about-campus">
+        <div class="container">
+            <h2>About Our Campus</h2>
+            <p>Our campus is a harmonious blend of modern school facilities and traditional madrasah values.</p>
+        </div>
+    </section>
+
+    <section class="school-section">
+        <div class="container">
+            <h2>School Facilities</h2>
+            <div class="facility-cards">
+                <div class="facility-card">
+                    <img src="facilities.jpeg" alt="School Facility 1">
+                    <h3>Modern Classrooms</h3>
+                    <p>State-of-the-art classrooms equipped with the latest technology.</p>
+                </div>
+                <div class="facility-card">
+                    <img src="facilities.jpeg" alt="School Facility 2">
+                    <h3>Science Labs</h3>
+                    <p>Fully equipped science labs for practical learning.</p>
+                </div>
+                <div class="facility-card">
+                    <img src="facilities.jpeg" alt="School Facility 3">
+                    <h3>Sports Facilities</h3>
+                    <p>Extensive sports facilities including fields, courts, and gyms.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="madrasah-section">
+        <div class="container">
+            <h2>Madrasah Facilities</h2>
+            <div class="facility-cards">
+                <div class="facility-card">
+                    <img src="mos.jpg" alt="Madrasah Facility 1">
+                    <h3>Prayer Halls</h3>
+                    <p>Spacious prayer halls for daily prayers and special occasions.</p>
+                </div>
+                <div class="facility-card">
+                    <img src="mos.jpg" alt="Madrasah Facility 2">
+                    <h3>Islamic Library</h3>
+                    <p>An extensive collection of Islamic literature and resources.</p>
+                </div>
+                <div class="facility-card">
+                    <img src="mos.jpg" alt="Madrasah Facility 3">
+                    <h3>Quranic Classes</h3>
+                    <p>Dedicated classrooms for Quranic and Arabic studies.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-links">
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-social">
+                <div class="social-links">
+                    <a href="#">Facebook</a>
+                    <a href="#">Twitter</a>
+                    <a href="#">Instagram</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        var navlink = document.getElementById('navlink');
+        var menuOpenIcon = document.getElementById('menu-open');
+        var menuCloseIcon = document.getElementById('menu-close');
+
+        function toggleMenu() {
+            navlink.classList.toggle('active');
+            if (navlink.classList.contains('active')) {
+                menuOpenIcon.style.display = 'none';
+                menuCloseIcon.style.display = 'block';
+            } else {
+                menuOpenIcon.style.display = 'block';
+                menuCloseIcon.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
