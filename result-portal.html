@@ -103,6 +103,27 @@
         }
       });
     }
+
+    // Function to save the last exam result
+    function saveLastResult(subject, score, total) {
+      const lastResult = { subject, score, total };
+      localStorage.setItem('lastResult', JSON.stringify(lastResult));
+    }
+
+    // Function to save past exam scores
+    function savePastScore(score, total) {
+      const pastScores = JSON.parse(localStorage.getItem('pastScores')) || [];
+      const date = new Date().toISOString();
+      pastScores.push({ score, total, date });
+      localStorage.setItem('pastScores', JSON.stringify(pastScores));
+    }
+
+    // Example usage:
+    const subject = 'Math';
+    const score = 85;
+    const total = 100;
+    saveLastResult(subject, score, total);
+    savePastScore(score, total);
   </script>
 </body>
 </html>

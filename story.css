@@ -11,8 +11,8 @@
 .header {
   min-height: 100vh;
   width: 100%;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(4, 9, 30, 0.7)), to(rgba(4, 9, 30, 0.7))), url("campus.avif");
-  background-image: linear-gradient(rgba(4, 9, 30, 0.7), rgba(4, 9, 30, 0.7)), url("campus.avif");
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(4, 9, 30, 0.7)), to(rgba(4, 9, 30, 0.7))), url("lol.jpg");
+  background-image: linear-gradient(rgba(4, 9, 30, 0.7), rgba(4, 9, 30, 0.7)), url("lol.jpg");
   background-size: cover;
   background-position: center;
   position: relative;
@@ -121,7 +121,7 @@ nav .fa {
   display: none;
 }
 
-.about-campus {
+.stories-section {
   padding: 50px 20px;
   text-align: center;
   background-color: #f4f4f4;
@@ -132,49 +132,80 @@ nav .fa {
   margin: auto;
 }
 
-.school-section, .madrasah-section {
-  padding: 50px 0;
+.stories-section h2 {
+  font-size: 36px;
+  font-weight: 600;
+  margin-bottom: 20px;
 }
 
-.facility-cards {
+.stories-section p {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 40px;
+}
+
+.stories-grid {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
 }
 
-.facility-card {
-  -ms-flex-preferred-size: 30%;
-      flex-basis: 30%;
-  border-radius: 10px;
+.story-card {
+  -ms-flex-preferred-size: 45%;
+      flex-basis: 45%;
+  background-color: #fff;
   margin-bottom: 20px;
+  border-radius: 10px;
   overflow: hidden;
   -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
           box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
-  padding: 20px;
-  text-align: center;
+  -webkit-transition: -webkit-transform 0.3s ease;
+  transition: -webkit-transform 0.3s ease;
+  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, -webkit-transform 0.3s ease;
 }
 
-.facility-card img {
+.story-card:hover {
+  -webkit-transform: translateY(-10px);
+          transform: translateY(-10px);
+}
+
+.story-card img {
   width: 100%;
-  border-radius: 10px 10px 0 0;
+  height: auto;
 }
 
-.facility-card h3 {
+.story-card h3 {
   font-size: 24px;
   color: #333;
-  margin: 20px 0 10px;
+  margin: 20px;
 }
 
-.facility-card p {
-  color: #777;
+.story-card p {
   font-size: 16px;
-  padding: 0 10px;
+  color: #777;
+  margin: 20px;
+}
+
+.read-more {
+  display: inline-block;
+  text-decoration: none;
+  color: #fff;
+  background: #f44336;
+  padding: 10px 20px;
+  margin: 20px;
+  border-radius: 5px;
+  -webkit-transition: background 0.3s;
+  transition: background 0.3s;
+}
+
+.read-more:hover {
+  background: #d32f2f;
 }
 
 footer {
@@ -208,61 +239,4 @@ footer {
   color: #fff;
   margin-right: 10px;
 }
-
-@media screen and (max-width: 768px) {
-  nav .fa {
-    display: block;
-    color: white;
-    font-size: 25px;
-    cursor: pointer;
-  }
-  .nav-links {
-    position: fixed;
-    background: #333;
-    height: 100vh;
-    width: 200px;
-    top: 0;
-    right: -200px;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-    -webkit-transition: 0.3s;
-    transition: 0.3s;
-  }
-  .nav-links.active {
-    right: 0;
-  }
-  .nav-links ul {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-    text-align: center;
-  }
-  .nav-links ul li {
-    margin: 20px 0;
-  }
-  .text-box h1 {
-    font-size: 40px;
-  }
-  .hero-btn {
-    font-size: 18px;
-    padding: 8px 20px;
-  }
-  .facility-cards {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-  }
-  .facility-card {
-    -ms-flex-preferred-size: 100%;
-        flex-basis: 100%;
-    margin-bottom: 20px;
-  }
-}
-/*# sourceMappingURL=campus.css.map */
+/*# sourceMappingURL=story.css.map */

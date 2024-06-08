@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Stories</title>
+    <link rel="stylesheet" href="story.css">
+</head>
+<body>
+    <header class="header">
+        <nav>
+            <a href="#">Logo</a>
+            <div class="nav-links" id="navlink">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Courses</a></li>
+                    <li><a href="#">Resources</a></li>
+                    <li><a href="#">Enroll Now</a></li>
+                    <li><a href="#">School Stories</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <i class="fa fa-bars" id="menu-open" onclick="toggleMenu()"></i>
+            <i class="fa fa-times" id="menu-close" onclick="toggleMenu()"></i>
+        </nav>
+        <div class="text-box">
+            <h1>School Stories</h1>
+            <p>Inspiring stories from our students, teachers, and alumni</p>
+        </div>
+    </header>
+
+    <section class="stories-section">
+        <div class="container">
+            <h2>Our Stories</h2>
+            <p>Discover the unique experiences and achievements of our community.</p>
+
+            <div class="stories-grid">
+                <div class="story-card">
+                    <img src="story1.jpg" alt="Story 1">
+                    <h3>Student Success: Jane Doe</h3>
+                    <p>Jane Doe shares her journey from struggling student to top performer, thanks to the supportive environment at our school.</p>
+                    <a href="#" class="read-more">Read More</a>
+                </div>
+                <div class="story-card">
+                    <img src="story2.jpg" alt="Story 2">
+                    <h3>Alumni Achievement: John Smith</h3>
+                    <p>John Smith, an alumnus, talks about how his time at our school helped him build a successful career in engineering.</p>
+                    <a href="#" class="read-more">Read More</a>
+                </div>
+                <div class="story-card">
+                    <img src="story3.jpg" alt="Story 3">
+                    <h3>Teacher Spotlight: Mrs. Johnson</h3>
+                    <p>Mrs. Johnson, a dedicated teacher, discusses her innovative teaching methods and their impact on students.</p>
+                    <a href="#" class="read-more">Read More</a>
+                </div>
+                <div class="story-card">
+                    <img src="story4.jpg" alt="Story 4">
+                    <h3>Community Project: Green Initiative</h3>
+                    <p>Learn about our school's green initiative and how students are contributing to environmental sustainability.</p>
+                    <a href="#" class="read-more">Read More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-links">
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-social">
+                <div class="social-links">
+                    <a href="#">Facebook</a>
+                    <a href="#">Twitter</a>
+                    <a href="#">Instagram</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        var navlink = document.getElementById('navlink');
+        var menuOpenIcon = document.getElementById('menu-open');
+        var menuCloseIcon = document.getElementById('menu-close');
+
+        function toggleMenu() {
+            navlink.classList.toggle('active');
+            if (navlink.classList.contains('active')) {
+                menuOpenIcon.style.display = 'none';
+                menuCloseIcon.style.display = 'block';
+            } else {
+                menuOpenIcon.style.display = 'block';
+                menuCloseIcon.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
