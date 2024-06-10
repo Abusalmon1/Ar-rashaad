@@ -127,8 +127,7 @@
 <body>
   <div class="result-container">
     <h2>Exam Results</h2>
-    <p id="lastResultMessage"></p>
-    <!-- Form to display last exam result -->
+    <p id="welcomeMessage"></p>
     <form id="lastResultForm">
       <label for="lastExam">Your last exam:</label>
       <input type="text" id="lastExam" name="lastExam" readonly><br><br>
@@ -166,21 +165,53 @@
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
+    let currentUser = null;
+
     document.addEventListener('DOMContentLoaded', () => {
-      displayLastResult();
-      displayPastScores();
-      displayPastResults();
+      const storedUser = localStorage.getItem('currentUser');
+      if (storedUser) {
+        currentUser = JSON.parse(storedUser);
+        displayWelcomeMessage();
+        displayLastResult();
+        displayPastScores();
+        displayPastResults();
+      } else {
+        promptUserLogin();
+      }
     });
 
-    function goToDashboard() {
-      window.location.href = 'dashboard.html';
+    function promptUserLogin() {
+      const userName = prompt('Please enter your name:');
+      if (userName) {
+        currentUser = userName;
+        localStorage.setItem('currentUser', JSON.stringify(currentUser));
+        initializeUserData();
+        displayWelcomeMessage();
+        displayLastResult();
+        displayPastScores();
+        displayPastResults();
+      }
+    }
+
+    function displayWelcomeMessage() {
+      document.getElementById('welcomeMessage').textContent = `Welcome, ${currentUser}`;
+    }
+
+    function initializeUserData() {
+      if (!localStorage.getItem(`${currentUser}_data`)) {
+        const initialData = {
+          lastResult: null,
+          pastScores: []
+        };
+        localStorage.setItem(`${currentUser}_data`, JSON.stringify(initialData));
+      }
     }
 
     function displayLastResult() {
-      const lastResult = JSON.parse(localStorage.getItem('lastResult'));
-      if (lastResult) {
-        document.getElementById('lastExam').value = lastResult.subject;
-        document.getElementById('lastScore').value = `${lastResult.score}/${lastResult.total}`;
+      const userData = JSON.parse(localStorage.getItem(`${currentUser}_data`));
+      if (userData && userData.lastResult) {
+        document.getElementById('lastExam').value = userData.lastResult.subject;
+        document.getElementById('lastScore').value = `${userData.lastResult.score}/${userData.lastResult.total}`;
       } else {
         document.getElementById('lastExam').value = 'No recent exam';
         document.getElementById('lastScore').value = 'No recent exam';
@@ -189,8 +220,8 @@
 
     function displayPastScores() {
       const ctx = document.getElementById('scoreChart').getContext('2d');
-      let pastScores = JSON.parse(localStorage.getItem('pastScores')) || [];
-      pastScores = pastScores.map(score => ({ ...score, date: new Date(score.date) }));
+      const userData = JSON.parse(localStorage.getItem(`${currentUser}_data`));
+      const pastScores = userData.pastScores.map(score => ({ ...score, date: new Date(score.date) }));
       pastScores.sort((a, b) => a.date - b.date);
 
       const labels = pastScores.map(score => score.date.toDateString());
@@ -220,11 +251,11 @@
     }
 
     function displayPastResults() {
-      const pastScores = JSON.parse(localStorage.getItem('pastScores')) || [];
+      const userData = JSON.parse(localStorage.getItem(`${currentUser}_data`));
       const tableBody = document.getElementById('pastResultsTable').querySelector('tbody');
       tableBody.innerHTML = '';
 
-      pastScores.forEach(score => {
+      userData.pastScores.forEach(score => {
         const row = document.createElement('tr');
         const dateCell = document.createElement('td');
         dateCell.textContent = new Date(score.date).toLocaleDateString();
@@ -254,10 +285,9 @@
       const modal = document.getElementById('correctionModal');
       const span = document.getElementsByClassName('close')[0];
       const correctionDetails = document.getElementById('correctionDetails');
-      
+
       correctionDetails.innerHTML = '';  // Clear previous details
 
-      // Assuming score.corrections is an array of correction details
       score.corrections.forEach(correction => {
         const p = document.createElement('p');
         p.textContent = `Question: ${correction.question}, Your Answer: ${correction.yourAnswer}, Correct Answer: ${correction.correctAnswer}, Feedback: ${correction.feedback}`;
@@ -278,14 +308,20 @@
     }
 
     function saveLastResult(subject, score, total, corrections) {
+      const userData = JSON.parse(localStorage.getItem(`${currentUser}_data`));
       const lastResult = { subject, score, total, corrections, date: new Date().toISOString() };
-      localStorage.setItem('lastResult', JSON.stringify(lastResult));
+      userData.lastResult = lastResult;
+      localStorage.setItem(`${currentUser}_data`, JSON.stringify(userData));
     }
 
     function savePastScore(subject, score, total, corrections) {
-      let pastScores = JSON.parse(localStorage.getItem('pastScores')) || [];
-      pastScores.push({ subject, score, total, corrections, date: new Date().toISOString() });
-      localStorage.setItem('pastScores', JSON.stringify(pastScores));
+      const userData = JSON.parse(localStorage.getItem(`${currentUser}_data`));
+      userData.pastScores.push({ subject, score, total, corrections, date: new Date().toISOString() });
+      localStorage.setItem(`${currentUser}_data`, JSON.stringify(userData));
+    }
+
+    function goToDashboard() {
+      window.location.href = 'dashboard.html';
     }
 
     // Example usage:

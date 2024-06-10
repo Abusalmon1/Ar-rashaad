@@ -95,6 +95,25 @@
       color: white;
       border-radius: 5px;
     }
+    .puzzle-piece {
+      width: 50px;
+      height: 50px;
+      background-color: #ddd;
+      margin: 5px;
+      display: inline-block;
+      border: 1px solid #bbb;
+      cursor: pointer;
+    }
+    .puzzle-piece.correct {
+      background-color: #28a745;
+    }
+    .puzzle-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      max-width: 300px;
+      margin: 20px auto;
+    }
   </style>
 </head>
 <body>
@@ -106,7 +125,6 @@
     <button id="parentLoginBtn">Parent Login</button>
   </div>
 
-  
   <div id="staffLoginModal" class="modal">
     <div class="modal-content">
       <span class="close" id="closeStaffModal">&times;</span>
@@ -123,7 +141,6 @@
     </div>
   </div>
 
-  
   <div id="studentLoginModal" class="modal">
     <div class="modal-content">
       <span class="close" id="closeStudentModal">&times;</span>
@@ -188,6 +205,17 @@
     </form>
   </div>
 
+  <!-- Verification Modal -->
+  <div id="verifyModal" class="modal">
+    <div class="modal-content">
+      <span class="close" id="closeVerifyModal">&times;</span>
+      <h2>Verification</h2>
+      <p id="teacherQuestion"></p>
+      <div class="puzzle-container" id="puzzleContainer"></div>
+      <button id="verifySubmitBtn">Submit</button>
+    </div>
+  </div>
+
   <script>
     // Modal display functions
     const staffLoginBtn = document.getElementById('staffLoginBtn');
@@ -201,6 +229,11 @@
     const closeParentModal = document.getElementById('closeParentModal');
     const loadingModal = document.getElementById('loadingModal');
     const progressBarFill = document.getElementById('progressBarFill');
+    const verifyModal = document.getElementById('verifyModal');
+    const closeVerifyModal = document.getElementById('closeVerifyModal');
+    const verifySubmitBtn = document.getElementById('verifySubmitBtn');
+    const puzzleContainer = document.getElementById('puzzleContainer');
+    const teacherQuestion = document.getElementById('teacherQuestion');
 
     staffLoginBtn.onclick = function() {
       staffLoginModal.style.display = 'block';
@@ -220,6 +253,9 @@
     closeParentModal.onclick = function() {
       parentLoginModal.style.display = 'none';
     }
+    closeVerifyModal.onclick = function() {
+      verifyModal.style.display = 'none';
+    }
     window.onclick = function(event) {
       if (event.target == staffLoginModal) {
         staffLoginModal.style.display = 'none';
@@ -227,6 +263,8 @@
         studentLoginModal.style.display = 'none';
       } else if (event.target == parentLoginModal) {
         parentLoginModal.style.display = 'none';
+      } else if (event.target == verifyModal) {
+        verifyModal.style.display = 'none';
       }
     }
 
@@ -245,49 +283,6 @@
       }, 10);
     }
 
-    // Login form event listeners
-    document.getElementById('staffLoginForm').addEventListener('submit', function(event) {
-      event.preventDefault();
-      const username = document.getElementById('staffUsername').value;
-      const password = document.getElementById('staffPassword').value;
-      if (username === 'ar-rashaad' && password === 'staff') {
-        showLoadingModal(() => {
-          alert('Staff login successful');
-          window.location.href = 'dashboard.html'; // Redirect to staff dashboard
-        });
-      } else {
-        alert('Invalid staff credentials');
-      }
-    });
-
-    document.getElementById('studentLoginForm').addEventListener('submit', function(event) {
-      event.preventDefault();
-      const username = document.getElementById('studentUsername').value;
-      const password = document.getElementById('studentPassword').value;
-      if (username === 'ar-rashaad' && password === 'student') {
-        showLoadingModal(() => {
-          alert('Student login successful');
-          window.location.href = 'dashboard.html'; // Redirect to exam page
-        });
-      } else {
-        alert('Invalid student credentials');
-      }
-    });
-
-    document.getElementById('parentLoginForm').addEventListener('submit', function(event) {
-      event.preventDefault();
-      const username = document.getElementById('parentUsername').value;
-      const password = document.getElementById('parentPassword').value;
-      if (username === 'ar-rashaad' && password === 'parent') {
-        showLoadingModal(() => {
-          alert('Parent login successful');
-          window.location.href = 'school.html'; // Redirect to home page
-        });
-      } else {
-        alert('Invalid parent credentials');
-      }
-    });
-
     // Display messages function
     function displayMessages(messages, index) {
       if (index < messages.length) {
@@ -305,7 +300,7 @@
       displayMessages(welcomeMessages, 0);
     };
 
-    // General login form
+    // General login form with verification
     document.getElementById('loginForm').addEventListener('submit', function(event) {
       event.preventDefault();
       const schNumber = document.getElementById('schNumber').value;
@@ -316,11 +311,58 @@
         localStorage.setItem('schNumber', schNumber);
         localStorage.setItem('name', name);
         localStorage.setItem('currentClass', classValue);
+        verifyUser(classValue);
+      } else {
+        alert('Please fill in all fields');
+      }
+    });
+
+    // Verification process
+    function verifyUser(selectedClass) {
+      let teacher = '';
+      if (selectedClass === 'ss1') {
+        teacher = 'Mrs. Rasheed';
+      } else if (selectedClass === 'ss2') {
+        teacher = 'Mrs. Balogun';
+      } else if (selectedClass === 'ss3') {
+        teacher = 'Mrs. Abdul Hamid';
+      }
+
+      teacherQuestion.textContent = `Who is your class teacher for ${selectedClass.toUpperCase()}?`;
+      verifyModal.style.display = 'block';
+
+      generatePuzzle(teacher);
+    }
+
+    function generatePuzzle(correctAnswer) {
+      puzzleContainer.innerHTML = '';
+      const pieces = [correctAnswer, 'Mrs. A', 'Mrs. B', 'Mrs. C'];
+      pieces.sort(() => Math.random() - 0.5);
+
+      pieces.forEach(piece => {
+        const pieceElem = document.createElement('div');
+        pieceElem.classList.add('puzzle-piece');
+        pieceElem.textContent = piece;
+        pieceElem.addEventListener('click', function() {
+          if (piece === correctAnswer) {
+            pieceElem.classList.add('correct');
+          } else {
+            alert('Incorrect, please try again.');
+          }
+        });
+        puzzleContainer.appendChild(pieceElem);
+      });
+    }
+
+    verifySubmitBtn.addEventListener('click', function() {
+      const correctPieces = document.querySelectorAll('.puzzle-piece.correct');
+      if (correctPieces.length > 0) {
+        verifyModal.style.display = 'none';
         showLoadingModal(() => {
           window.location.href = 'dashboard.html'; // Redirect to dashboard
         });
       } else {
-        alert('Please fill in all fields');
+        alert('Please complete the puzzle correctly.');
       }
     });
   </script>
