@@ -5,18 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Exam Results</title>
   <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+    }
     .result-container {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 100vh;
+      min-height: 100vh;
       text-align: center;
-      background-color: #f4f4f4;
+      background-color: #fff;
       padding: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
     .result-container h2 {
       margin-bottom: 20px;
+      font-size: 2rem;
     }
     .result-container button {
       padding: 10px 20px;
@@ -26,13 +33,94 @@
       border-radius: 5px;
       cursor: pointer;
       margin-top: 20px;
+      font-size: 1rem;
     }
     .result-container button:hover {
       background-color: #218838;
     }
+    form {
+      width: 100%;
+      max-width: 500px;
+      margin-bottom: 20px;
+    }
+    form label {
+      display: block;
+      margin: 10px 0 5px;
+      text-align: left;
+    }
+    form input {
+      width: 100%;
+      padding: 10px;
+      box-sizing: border-box;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
     canvas {
       margin-top: 20px;
-      max-width: 90%;
+      max-width: 100%;
+    }
+    .past-results {
+      margin-top: 20px;
+      width: 100%;
+      max-width: 100%;
+      overflow-x: auto;
+    }
+    .past-results h3 {
+      margin-bottom: 10px;
+    }
+    .past-results table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 600px;
+    }
+    .past-results th, .past-results td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: center;
+    }
+    .past-results th {
+      background-color: #f2f2f2;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      padding-top: 60px;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.4);
+    }
+    .modal-content {
+      background-color: #fefefe;
+      margin: 5% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 90%;
+      max-width: 700px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    @media (max-width: 600px) {
+      .result-container h2 {
+        font-size: 1.5rem;
+      }
+      .result-container button {
+        font-size: 0.9rem;
+      }
     }
   </style>
 </head>
@@ -49,12 +137,39 @@
     </form>
     <button onclick="goToDashboard()">Go to Dashboard</button>
     <canvas id="scoreChart"></canvas>
+
+    <div class="past-results">
+      <h3>Past Exam Results</h3>
+      <table id="pastResultsTable">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Subject</th>
+            <th>Score</th>
+            <th>Total</th>
+            <th>Correction</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
   </div>
+
+  <!-- The Modal -->
+  <div id="correctionModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Correction Details</h2>
+      <div id="correctionDetails"></div>
+    </div>
+  </div>
+
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       displayLastResult();
       displayPastScores();
+      displayPastResults();
     });
 
     function goToDashboard() {
@@ -104,26 +219,107 @@
       });
     }
 
-    // Function to save the last exam result
-    function saveLastResult(subject, score, total) {
-      const lastResult = { subject, score, total };
+    function displayPastResults() {
+      const pastScores = JSON.parse(localStorage.getItem('pastScores')) || [];
+      const tableBody = document.getElementById('pastResultsTable').querySelector('tbody');
+      tableBody.innerHTML = '';
+
+      pastScores.forEach(score => {
+        const row = document.createElement('tr');
+        const dateCell = document.createElement('td');
+        dateCell.textContent = new Date(score.date).toLocaleDateString();
+        const subjectCell = document.createElement('td');
+        subjectCell.textContent = score.subject || 'Unknown';
+        const scoreCell = document.createElement('td');
+        scoreCell.textContent = score.score;
+        const totalCell = document.createElement('td');
+        totalCell.textContent = score.total;
+        const correctionCell = document.createElement('td');
+        const correctionButton = document.createElement('button');
+        correctionButton.textContent = 'View';
+        correctionButton.addEventListener('click', () => {
+          showCorrection(score);
+        });
+        correctionCell.appendChild(correctionButton);
+        row.appendChild(dateCell);
+        row.appendChild(subjectCell);
+        row.appendChild(scoreCell);
+        row.appendChild(totalCell);
+        row.appendChild(correctionCell);
+        tableBody.appendChild(row);
+      });
+    }
+
+    function showCorrection(score) {
+      const modal = document.getElementById('correctionModal');
+      const span = document.getElementsByClassName('close')[0];
+      const correctionDetails = document.getElementById('correctionDetails');
+      
+      correctionDetails.innerHTML = '';  // Clear previous details
+
+      // Assuming score.corrections is an array of correction details
+      score.corrections.forEach(correction => {
+        const p = document.createElement('p');
+        p.textContent = `Question: ${correction.question}, Your Answer: ${correction.yourAnswer}, Correct Answer: ${correction.correctAnswer}, Feedback: ${correction.feedback}`;
+        correctionDetails.appendChild(p);
+      });
+
+      modal.style.display = 'block';
+
+      span.onclick = function() {
+        modal.style.display = 'none';
+      }
+
+      window.onclick = function(event) {
+        if (event.target == modal) {
+          modal.style.display = 'none';
+        }
+      }
+    }
+
+    function saveLastResult(subject, score, total, corrections) {
+      const lastResult = { subject, score, total, corrections, date: new Date().toISOString() };
       localStorage.setItem('lastResult', JSON.stringify(lastResult));
     }
 
-    // Function to save past exam scores
-    function savePastScore(score, total) {
-      const pastScores = JSON.parse(localStorage.getItem('pastScores')) || [];
-      const date = new Date().toISOString();
-      pastScores.push({ score, total, date });
+    function savePastScore(subject, score, total, corrections) {
+      let pastScores = JSON.parse(localStorage.getItem('pastScores')) || [];
+      pastScores.push({ subject, score, total, corrections, date: new Date().toISOString() });
       localStorage.setItem('pastScores', JSON.stringify(pastScores));
     }
 
     // Example usage:
     const subject = 'Math';
-    const score = 85;
-    const total = 100;
-    saveLastResult(subject, score, total);
-    savePastScore(score, total);
+    const score = 8;
+    const total = 10;
+    const corrections = [
+      {
+        question: 'What is 2 + 2?',
+        yourAnswer: '4',
+        correctAnswer: '4',
+        feedback: 'Correct!'
+      },
+      {
+        question: 'What is 3 + 5?',
+        yourAnswer: '7',
+        correctAnswer: '8',
+        feedback: 'Incorrect, the correct answer is 8.'
+      },
+      {
+        question: 'What is 4 + 4?',
+        yourAnswer: '9',
+        correctAnswer: '8',
+        feedback: 'Incorrect, the correct answer is 8.'
+      },
+      {
+        question: 'What is 5 + 4?',
+        yourAnswer: '9',
+        correctAnswer: '9',
+        feedback: 'Correct!'
+      }
+    ];
+    saveLastResult(subject, score, total, corrections);
+    savePastScore(subject, score, total, corrections);
   </script>
 </body>
 </html>

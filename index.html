@@ -6,24 +6,166 @@
   <title>Ar-Rashaad Academy Exam Login</title>
   <link rel="stylesheet" href="style.css">
   <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .login-container {
+      text-align: center;
+    }
+    .input-container {
+      margin-bottom: 15px;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #218838;
+    }
     .message-container {
-      background-color: rgba(255, 255, 255, 0.9); 
+      background-color: rgba(255, 255, 255, 0.9);
       padding: 10px;
       border-radius: 5px;
       text-align: center;
-      position: fixed; 
-      top: 0; 
-      left: 50%; 
-      transform: translateX(-50%); 
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
       width: 90%;
-      max-width: 400px; 
+      max-width: 400px;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgb(0,0,0);
+      background-color: rgba(0,0,0,0.4);
+      padding-top: 60px;
+    }
+    .modal-content {
+      background-color: #fefefe;
+      margin: 5% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+      max-width: 300px;
+      border-radius: 10px;
+      text-align: center;
+    }
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .progress-bar {
+      width: 100%;
+      background-color: #f3f3f3;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+    .progress-bar-fill {
+      width: 0;
+      height: 20px;
+      background-color: #28a745;
+      text-align: center;
+      line-height: 20px;
+      color: white;
+      border-radius: 5px;
     }
   </style>
 </head>
 <body>
-  <div class="message-container" id="messageContainer">
-    
+  <div class="message-container" id="messageContainer"></div>
+  <div class="login-container">
+    <h2>Ar-Rashaad Academy Login Portal</h2>
+    <button id="staffLoginBtn">Staff Login</button>
+    <button id="studentLoginBtn">Student Login</button>
+    <button id="parentLoginBtn">Parent Login</button>
   </div>
+
+  
+  <div id="staffLoginModal" class="modal">
+    <div class="modal-content">
+      <span class="close" id="closeStaffModal">&times;</span>
+      <h2>Staff Login</h2>
+      <form id="staffLoginForm">
+        <div class="input-container">
+          <input type="text" id="staffUsername" name="username" placeholder="Username" required>
+        </div>
+        <div class="input-container">
+          <input type="password" id="staffPassword" name="password" placeholder="Password" required>
+        </div>
+        <button type="submit">Login</button>
+      </form>
+    </div>
+  </div>
+
+  
+  <div id="studentLoginModal" class="modal">
+    <div class="modal-content">
+      <span class="close" id="closeStudentModal">&times;</span>
+      <h2>Student Login</h2>
+      <form id="studentLoginForm">
+        <div class="input-container">
+          <input type="text" id="studentUsername" name="username" placeholder="Username" required>
+        </div>
+        <div class="input-container">
+          <input type="password" id="studentPassword" name="password" placeholder="Password" required>
+        </div>
+        <button type="submit">Login</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Parent Login Modal -->
+  <div id="parentLoginModal" class="modal">
+    <div class="modal-content">
+      <span class="close" id="closeParentModal">&times;</span>
+      <h2>Parent Login</h2>
+      <form id="parentLoginForm">
+        <div class="input-container">
+          <input type="text" id="parentUsername" name="username" placeholder="Username" required>
+        </div>
+        <div class="input-container">
+          <input type="password" id="parentPassword" name="password" placeholder="Password" required>
+        </div>
+        <button type="submit">Login</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="loadingModal" class="modal">
+    <div class="modal-content">
+      <h2>Loading...</h2>
+      <div class="progress-bar">
+        <div class="progress-bar-fill" id="progressBarFill">0%</div>
+      </div>
+    </div>
+  </div>
+
   <div class="login-container">
     <h2>Ar-Rashaad Academy Exam Login</h2>
     <form id="loginForm">
@@ -47,25 +189,123 @@
   </div>
 
   <script>
+    // Modal display functions
+    const staffLoginBtn = document.getElementById('staffLoginBtn');
+    const studentLoginBtn = document.getElementById('studentLoginBtn');
+    const parentLoginBtn = document.getElementById('parentLoginBtn');
+    const staffLoginModal = document.getElementById('staffLoginModal');
+    const studentLoginModal = document.getElementById('studentLoginModal');
+    const parentLoginModal = document.getElementById('parentLoginModal');
+    const closeStaffModal = document.getElementById('closeStaffModal');
+    const closeStudentModal = document.getElementById('closeStudentModal');
+    const closeParentModal = document.getElementById('closeParentModal');
+    const loadingModal = document.getElementById('loadingModal');
+    const progressBarFill = document.getElementById('progressBarFill');
 
+    staffLoginBtn.onclick = function() {
+      staffLoginModal.style.display = 'block';
+    }
+    studentLoginBtn.onclick = function() {
+      studentLoginModal.style.display = 'block';
+    }
+    parentLoginBtn.onclick = function() {
+      parentLoginModal.style.display = 'block';
+    }
+    closeStaffModal.onclick = function() {
+      staffLoginModal.style.display = 'none';
+    }
+    closeStudentModal.onclick = function() {
+      studentLoginModal.style.display = 'none';
+    }
+    closeParentModal.onclick = function() {
+      parentLoginModal.style.display = 'none';
+    }
+    window.onclick = function(event) {
+      if (event.target == staffLoginModal) {
+        staffLoginModal.style.display = 'none';
+      } else if (event.target == studentLoginModal) {
+        studentLoginModal.style.display = 'none';
+      } else if (event.target == parentLoginModal) {
+        parentLoginModal.style.display = 'none';
+      }
+    }
+
+    function showLoadingModal(callback) {
+      loadingModal.style.display = 'block';
+      let progress = 0;
+      const interval = setInterval(() => {
+        progress += 1;
+        progressBarFill.style.width = `${progress}%`;
+        progressBarFill.textContent = `${progress}%`;
+        if (progress === 100) {
+          clearInterval(interval);
+          loadingModal.style.display = 'none';
+          callback();
+        }
+      }, 10);
+    }
+
+    // Login form event listeners
+    document.getElementById('staffLoginForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const username = document.getElementById('staffUsername').value;
+      const password = document.getElementById('staffPassword').value;
+      if (username === 'ar-rashaad' && password === 'staff') {
+        showLoadingModal(() => {
+          alert('Staff login successful');
+          window.location.href = 'dashboard.html'; // Redirect to staff dashboard
+        });
+      } else {
+        alert('Invalid staff credentials');
+      }
+    });
+
+    document.getElementById('studentLoginForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const username = document.getElementById('studentUsername').value;
+      const password = document.getElementById('studentPassword').value;
+      if (username === 'ar-rashaad' && password === 'student') {
+        showLoadingModal(() => {
+          alert('Student login successful');
+          window.location.href = 'dashboard.html'; // Redirect to exam page
+        });
+      } else {
+        alert('Invalid student credentials');
+      }
+    });
+
+    document.getElementById('parentLoginForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const username = document.getElementById('parentUsername').value;
+      const password = document.getElementById('parentPassword').value;
+      if (username === 'ar-rashaad' && password === 'parent') {
+        showLoadingModal(() => {
+          alert('Parent login successful');
+          window.location.href = 'school.html'; // Redirect to home page
+        });
+      } else {
+        alert('Invalid parent credentials');
+      }
+    });
+
+    // Display messages function
     function displayMessages(messages, index) {
       if (index < messages.length) {
         const messageContainer = document.getElementById('messageContainer');
         messageContainer.innerHTML = messages[index];
         setTimeout(() => {
           displayMessages(messages, index + 1);
-        }, 2000); 
+        }, 2000);
       }
     }
 
-   
     const welcomeMessages = ["Welcome to Ar-Rashaad CBT!", "Are you ready for the exam?", "Just one hour of exam left. Are you prepared?", "Can we start the exam, please?"];
 
     window.onload = function() {
       displayMessages(welcomeMessages, 0);
     };
 
- 
+    // General login form
     document.getElementById('loginForm').addEventListener('submit', function(event) {
       event.preventDefault();
       const schNumber = document.getElementById('schNumber').value;
@@ -76,7 +316,9 @@
         localStorage.setItem('schNumber', schNumber);
         localStorage.setItem('name', name);
         localStorage.setItem('currentClass', classValue);
-        window.location.href = 'dashboard.html';
+        showLoadingModal(() => {
+          window.location.href = 'dashboard.html'; // Redirect to dashboard
+        });
       } else {
         alert('Please fill in all fields');
       }
