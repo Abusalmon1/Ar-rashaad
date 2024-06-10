@@ -204,3 +204,10 @@ footer {
     margin-right: 10px;
 }
 
+
+@media (max-width: 768px) {
+    .stories-grid{
+        display: flex;
+        flex-direction: column;
+    }
+}
